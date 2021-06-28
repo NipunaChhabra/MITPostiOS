@@ -7,21 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35EA592F02841B69945A656B /* Pods_MitPostiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30497F9AB7B52D13CF9F1301 /* Pods_MitPostiOS.framework */; };
+		C60AE54E2688FCD80003C6F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE54D2688FCD80003C6F4 /* Extensions.swift */; };
+		C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE5502688FE060003C6F4 /* MasterTabBarController.swift */; };
+		C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE552268901A10003C6F4 /* MasterNavController.swift */; };
+		C60AE555268901FD0003C6F4 /* SocialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE554268901FD0003C6F4 /* SocialTableViewController.swift */; };
+		C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE556268902230003C6F4 /* SLCMViewController.swift */; };
+		C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE558268902690003C6F4 /* EventsTableViewController.swift */; };
+		C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */; };
+		C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */; };
+		C64B083F268A49D800696FEA /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B083E268A49D800696FEA /* Networking.swift */; };
+		C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0840268A50ED00696FEA /* ArticleCell.swift */; };
+		C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0842268A5FB000696FEA /* ArticleModel.swift */; };
 		C6FDE0042688F8BF00CBC270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */; };
 		C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */; };
-		C6FDE0082688F8BF00CBC270 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0072688F8BF00CBC270 /* ViewController.swift */; };
-		C6FDE00B2688F8BF00CBC270 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6FDE0092688F8BF00CBC270 /* Main.storyboard */; };
+		C6FDE0082688F8BF00CBC270 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0072688F8BF00CBC270 /* ArticleViewController.swift */; };
 		C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE00C2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld */; };
 		C6FDE0102688F8C100CBC270 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FDE00F2688F8C100CBC270 /* Assets.xcassets */; };
 		C6FDE0132688F8C100CBC270 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6FDE0112688F8C100CBC270 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04F28976DA3AC0EA6F3A72DD /* Pods-MitPostiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MitPostiOS.release.xcconfig"; path = "Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS.release.xcconfig"; sourceTree = "<group>"; };
+		0DBD640F2C49C516B3FCDBD2 /* Pods-MitPostiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MitPostiOS.debug.xcconfig"; path = "Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		30497F9AB7B52D13CF9F1301 /* Pods_MitPostiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MitPostiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C60AE54D2688FCD80003C6F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C60AE5502688FE060003C6F4 /* MasterTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTabBarController.swift; sourceTree = "<group>"; };
+		C60AE552268901A10003C6F4 /* MasterNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavController.swift; sourceTree = "<group>"; };
+		C60AE554268901FD0003C6F4 /* SocialTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewController.swift; sourceTree = "<group>"; };
+		C60AE556268902230003C6F4 /* SLCMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLCMViewController.swift; sourceTree = "<group>"; };
+		C60AE558268902690003C6F4 /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
+		C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticesTableViewController.swift; sourceTree = "<group>"; };
+		C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
+		C64B083E268A49D800696FEA /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		C64B0840268A50ED00696FEA /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		C64B0842268A5FB000696FEA /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		C6FDE0002688F8BF00CBC270 /* MitPostiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MitPostiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C6FDE0072688F8BF00CBC270 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C6FDE00A2688F8BF00CBC270 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C6FDE0072688F8BF00CBC270 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		C6FDE00D2688F8BF00CBC270 /* MitPostiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MitPostiOS.xcdatamodel; sourceTree = "<group>"; };
 		C6FDE00F2688F8C100CBC270 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6FDE0122688F8C100CBC270 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,17 +57,73 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35EA592F02841B69945A656B /* Pods_MitPostiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C26A54B036690B93DAC5C61B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30497F9AB7B52D13CF9F1301 /* Pods_MitPostiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C60AE54F2688FDEC0003C6F4 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */,
+				C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */,
+				C60AE5502688FE060003C6F4 /* MasterTabBarController.swift */,
+				C60AE552268901A10003C6F4 /* MasterNavController.swift */,
+			);
+			path = Master;
+			sourceTree = "<group>";
+		};
+		C64B0844268A61E800696FEA /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				C64B0845268A61FA00696FEA /* View */,
+				C64B0846268A620200696FEA /* Model */,
+				C64B0847268A620900696FEA /* Controller */,
+			);
+			path = Articles;
+			sourceTree = "<group>";
+		};
+		C64B0845268A61FA00696FEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C64B0840268A50ED00696FEA /* ArticleCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C64B0846268A620200696FEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C64B0842268A5FB000696FEA /* ArticleModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C64B0847268A620900696FEA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C6FDE0072688F8BF00CBC270 /* ArticleViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C6FDDFF72688F8BE00CBC270 = {
 			isa = PBXGroup;
 			children = (
 				C6FDE0022688F8BF00CBC270 /* MitPostiOS */,
 				C6FDE0012688F8BF00CBC270 /* Products */,
+				CF3E2300D545C33279FEF404 /* Pods */,
+				C26A54B036690B93DAC5C61B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +138,31 @@
 		C6FDE0022688F8BF00CBC270 /* MitPostiOS */ = {
 			isa = PBXGroup;
 			children = (
-				C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */,
-				C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */,
-				C6FDE0072688F8BF00CBC270 /* ViewController.swift */,
-				C6FDE0092688F8BF00CBC270 /* Main.storyboard */,
+				C60AE54F2688FDEC0003C6F4 /* Master */,
+				C60AE54D2688FCD80003C6F4 /* Extensions.swift */,
 				C6FDE00F2688F8C100CBC270 /* Assets.xcassets */,
 				C6FDE0112688F8C100CBC270 /* LaunchScreen.storyboard */,
 				C6FDE0142688F8C100CBC270 /* Info.plist */,
+				C64B0844268A61E800696FEA /* Articles */,
+				C60AE554268901FD0003C6F4 /* SocialTableViewController.swift */,
+				C60AE556268902230003C6F4 /* SLCMViewController.swift */,
+				C60AE558268902690003C6F4 /* EventsTableViewController.swift */,
+				C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */,
+				C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */,
+				C64B083E268A49D800696FEA /* Networking.swift */,
 				C6FDE00C2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld */,
 			);
 			path = MitPostiOS;
+			sourceTree = "<group>";
+		};
+		CF3E2300D545C33279FEF404 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0DBD640F2C49C516B3FCDBD2 /* Pods-MitPostiOS.debug.xcconfig */,
+				04F28976DA3AC0EA6F3A72DD /* Pods-MitPostiOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6FDE0172688F8C100CBC270 /* Build configuration list for PBXNativeTarget "MitPostiOS" */;
 			buildPhases = (
+				3E1A37201EFC374DD39C3945 /* [CP] Check Pods Manifest.lock */,
 				C6FDDFFC2688F8BF00CBC270 /* Sources */,
 				C6FDDFFD2688F8BF00CBC270 /* Frameworks */,
 				C6FDDFFE2688F8BF00CBC270 /* Resources */,
+				800D606C7A06403F276A5A1F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,35 +226,79 @@
 			files = (
 				C6FDE0132688F8C100CBC270 /* LaunchScreen.storyboard in Resources */,
 				C6FDE0102688F8C100CBC270 /* Assets.xcassets in Resources */,
-				C6FDE00B2688F8BF00CBC270 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E1A37201EFC374DD39C3945 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MitPostiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		800D606C7A06403F276A5A1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C6FDDFFC2688F8BF00CBC270 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FDE0082688F8BF00CBC270 /* ViewController.swift in Sources */,
+				C60AE54E2688FCD80003C6F4 /* Extensions.swift in Sources */,
+				C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */,
+				C6FDE0082688F8BF00CBC270 /* ArticleViewController.swift in Sources */,
 				C6FDE0042688F8BF00CBC270 /* AppDelegate.swift in Sources */,
+				C64B083F268A49D800696FEA /* Networking.swift in Sources */,
+				C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */,
+				C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */,
+				C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */,
+				C60AE555268901FD0003C6F4 /* SocialTableViewController.swift in Sources */,
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
+				C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */,
+				C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */,
+				C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */,
+				C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C6FDE0092688F8BF00CBC270 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6FDE00A2688F8BF00CBC270 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C6FDE0112688F8C100CBC270 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,10 +428,12 @@
 		};
 		C6FDE0182688F8C100CBC270 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DBD640F2C49C516B3FCDBD2 /* Pods-MitPostiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CPSMM6Y56;
 				INFOPLIST_FILE = MitPostiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -300,16 +443,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = R.MitPostiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		C6FDE0192688F8C100CBC270 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04F28976DA3AC0EA6F3A72DD /* Pods-MitPostiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CPSMM6Y56;
 				INFOPLIST_FILE = MitPostiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -319,7 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = R.MitPostiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
