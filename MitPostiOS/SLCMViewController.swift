@@ -26,7 +26,7 @@ class SLCMViewController: UIViewController {
 //        navigationController.pre
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "SLCM"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
 
     }
 

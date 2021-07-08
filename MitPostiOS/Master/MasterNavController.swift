@@ -19,18 +19,14 @@ class MasterNavigationBarController: UINavigationController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
+     
 //        navigationBar.isTranslucent = false
         if #available(iOS 13.0, *) {
-            navigationBar.tintColor = UIColor(named: "directoryColor")
+            navigationBar.tintColor = .orange// UIColor(named: "directoryColor")
             view.backgroundColor = .systemBackground
         } else {
 //            setupTheming()
         }
-    }
-    
-    @objc func infoPressed(){
-        print("Do something")
     }
 }
 

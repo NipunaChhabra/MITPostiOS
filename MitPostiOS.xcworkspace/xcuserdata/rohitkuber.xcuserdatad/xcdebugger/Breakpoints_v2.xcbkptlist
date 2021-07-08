@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "3FEC4CD6-5E31-4A59-BD33-006FDB2678F0"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "842A2442-BCF3-40E8-8538-7CCD2E0AA62E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/SocialTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E453BB8B-0B83-4576-817F-78A77EA76C51"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/InstagramTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init(style:reuseIdentifier:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "486884CA-A793-4624-BC37-079B380B5021"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/InstagramHorizontalController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/Articles/Controller/ArticleViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "ArticleViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - 725a902816b60e1f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.articles.getter : Swift.Optional&lt;Swift.Array&lt;MitPostiOS.ArticleModel&gt;&gt;"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - 15280737c933502b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.articles.setter : Swift.Optional&lt;Swift.Array&lt;MitPostiOS.ArticleModel&gt;&gt;"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - ca1b34b3f3649449"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.articles.modify : Swift.Optional&lt;Swift.Array&lt;MitPostiOS.ArticleModel&gt;&gt;"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - 1f231e7863cfda65"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.articles.modify : Swift.Optional&lt;Swift.Array&lt;MitPostiOS.ArticleModel&gt;&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - 424d7c23af9f8ec0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MitPostiOS.ArticleViewController"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "3C63D6C7-CBBA-4294-8957-8C3D518C569F - 461e505776fb4e1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.ArticleViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MitPostiOS.ArticleViewController&gt;"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/Articles/Controller/ArticleViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3635E2D4-91CD-429B-A99D-CF41666B6690"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/NoticesTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "getNotices()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3635E2D4-91CD-429B-A99D-CF41666B6690 - 893807b3c5e1864a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MitPostiOS.NoticesTableViewController.getNotices() -&gt; ()"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/NoticesTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "3635E2D4-91CD-429B-A99D-CF41666B6690 - 1882d0ad9f700202"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;MitPostiOS.Notice&gt;) -&gt; () in MitPostiOS.NoticesTableViewController.getNotices() -&gt; ()"
+                  moduleName = "MitPostiOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rohitkuber/Desktop/MitPostiOS/MitPostiOS/NoticesTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C0ADCAC-27D9-4DCF-A1A8-08610AF6CC3E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/Services and Utilities/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "getNoticeData(method:dataCompletion:errorCompletion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54B17EB5-24E5-49C8-9F33-E61E84B30832"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/Social/View/InstagramCollectionViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "fetchImage(imageURL:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "61F1F1AC-2CB5-49CA-8D52-4DB7B9D10FCC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MitPostiOS/NoticesTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "getNotices()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

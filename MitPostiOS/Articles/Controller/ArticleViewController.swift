@@ -6,18 +6,74 @@
 //
 
 import UIKit
+import Alamofire
 
-class ArticleViewController: UITableViewController {
+class ArticleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SearchTagsControllerDelegate {
+    
+    
+//    MARK:-  Properties
+    
+    var filteredArticles: [ArticleModel]?{
+        didSet{
+            guard filteredArticles != nil else { return }
+//            self.eventsTableView.reloadData(with: .automatic)
+            UIView.transition(with: articleTableView,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: { self.articleTableView.reloadData() })
+        }
+    }
+    
+    var tags: [String] = ["All","Arts &amp; Culture","Campus","Fests","Sitting Down With","National &amp; World","Science and Technology","FAQ","General"]
+    
+    fileprivate let tagsController = SearchTagsController(collectionViewLayout: UICollectionViewFlowLayout())
     
     private let articleCellID = "ArticleCell"
+    
+    var articles : [ArticleModel]?{
+        didSet{
+            DispatchQueue.main.async {
+                self.articleTableView.reloadData()
+            }
+        }
+    }
+    
+    lazy var articleTableView : UITableView = {
+       let tableView = UITableView()
+        tableView.register(ArticleCell.self, forCellReuseIdentifier: articleCellID)
+        tableView.tableFooterView = UIView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
+        tableView.isUserInteractionEnabled = true
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+       return tableView
+    }()
+    
+    
+    
+//    MARK: - Helper functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor(named: "defaultBG")
+        view.backgroundColor = UIColor(named: "defaultBG")
+        articleTableView.backgroundColor = UIColor(named: "defaultBG")
         setupNavigationBar()
-        setupTableView()
-       
-        // Do any additional setup after loading the view.
+        navigationItem.largeTitleDisplayMode = .never
+        setupUI()
+        getArticles()
+    }
+    
+    func getArticles(){
+        
+        Networking.sharedInstance.getArticleData(method: HTTPMethods.get.description, dataCompletion: { articleData in
+            self.tagsController.view.isHidden = false
+            self.filteredArticles = articleData
+            self.articles = articleData
+        }, errorCompletion: { err in
+            print("Error in fetching article/post data", err)
+        })
     }
     
     @objc func infoPressed(){
@@ -27,65 +83,74 @@ class ArticleViewController: UITableViewController {
     }
     
     
-    
-    fileprivate func setupNavigationBar(){
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Articles"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
+    func didTapTag(indexPath: IndexPath) {
+        let tag = tags[indexPath.item]
+        if tag == "All"{
+            self.filteredArticles = self.articles
+            return
+        }
+        
+        
+        self.filteredArticles = self.articles?.filter({ article in
+            article.category.contains(tag)
+        })
     }
     
-    private func setupTableView(){
-        tableView.register(ArticleCell.self, forCellReuseIdentifier: articleCellID)
-        tableView.tableFooterView = UIView()
-//        tableView.contentInset = UIEdgeInsets(top: 4, left: 10, bottom: 4, right: 10)
-        tableView.isUserInteractionEnabled = true
-        tableView.separatorStyle = .none
+    
+//    MARK:- UI setup
+    
+    fileprivate func setupNavigationBar(){
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Articles"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
+    }
+    
+    private func setupUI(){
+        tagsController.delegate = self
+        tagsController.indexValue = 0
+        let tagsView = tagsController.view!
+//        view.backgroundColor = .clear
+//
+        view.addSubview(tagsView)
+        _ = tagsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 50)
+        tagsView.isHidden = true
+
+        tagsController.collectionView.selectItem(at: [0, 0], animated: true, scrollPosition: .centeredHorizontally)
+        
+        view.addSubview(articleTableView)
+        _ = articleTableView.anchor(top:tagsView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
+        
     }
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 5
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredArticles?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: articleCellID, for: indexPath) as! ArticleCell
+        
+        cell.articleData = filteredArticles?[indexPath.row] ?? nil
         cell.backgroundColor = .clear
-//        cell.layer.cornerRadius = 2
-//        cell.layer.borderWidth = 1
-//        cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
     
-    
-    
-
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
-    */
-
-
+    
+     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+           return UIView()
+       }
 
 }
 

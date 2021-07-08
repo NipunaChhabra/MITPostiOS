@@ -11,7 +11,7 @@ struct ArticleModel : Codable{
     
     let _id : Int
     let category : String
-    let timeStamp : String
+    let timestamp : String
     let date : DateModel?
     let title : String?
     let featured_media :String?

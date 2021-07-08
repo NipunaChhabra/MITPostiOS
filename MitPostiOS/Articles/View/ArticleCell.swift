@@ -7,9 +7,16 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 
 class ArticleCell : UITableViewCell{
+    
+    var articleData: ArticleModel?{
+        didSet{
+            configureUI()
+        }
+    }
     
     lazy var backgroundCard : UIView = {
         let bg = UIView()
@@ -20,7 +27,7 @@ class ArticleCell : UITableViewCell{
 //        bg.backgroundColor = UIColor(white: 1, alpha: 1)
 //        bg.layer.cornerRadius = 40
         return bg
-    }()
+    }()  
     
     
     lazy var postImageView: UIImageView = {
@@ -72,7 +79,7 @@ class ArticleCell : UITableViewCell{
         label.font = UIFont.italicSystemFont(ofSize: 15)
         label.textColor = .gray
         label.numberOfLines = 1
-        label.text = "29 June 2021"
+        label.text = ""
         label.textAlignment = .left
         return label
     }()
@@ -87,7 +94,7 @@ class ArticleCell : UITableViewCell{
         label.font = UIFont.systemFont(ofSize: 17)
         
         label.numberOfLines = 0
-        label.text = "w;kwkerwewer  dfjsdnflsfmlksmfklsmflksmflsmdflsmflksmfklsmf\n adfsdf sdfsdf"
+        label.text = "w;kwkerwewer  dfjsdnflsfmlksmfklsmflksmflsmdflsmflksmfklsmf\n adfsdf sdfsdf\n skdjfnsjkdfnjksdnfskdfnkjsnfdkjsndfjksndfkjsndfkjsdnfkjsndfjksndfkjnf"
         label.textAlignment = .left
         return label
     }()
@@ -105,19 +112,42 @@ class ArticleCell : UITableViewCell{
         _ = postImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, heightConstant: 200)
         
         addSubview(postTitleLabel)
-        _ = postTitleLabel.anchor(top: postImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
+        _ = postTitleLabel.anchor(top: postImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 20)
         
         let stackView = UIStackView(arrangedSubviews: [authorNameLabel,dateLabel])
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         
         addSubview(stackView)
-        _ = stackView.anchor(top: postTitleLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 16, bottomConstant: 0, rightConstant: 16, heightConstant: 16)
+        _ = stackView.anchor(top: postTitleLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 20, heightConstant: 16)
         
         addSubview(descriptionLabel)
-        _ = descriptionLabel.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 16, bottomConstant: 10, rightConstant: 16)
+        _ = descriptionLabel.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 10, rightConstant: 20)
         
         _ = backgroundCard.anchor(top: postImageView.topAnchor, left: leftAnchor, bottom: descriptionLabel.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: -8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+    }
+    
+    func configureUI(){
+        guard let article = articleData else {
+            return
+        }
+        
+        postImageView.sd_setImage(with: URL(string: article.featured_media!), completed: nil)
+        
+        postTitleLabel.text = article.title
+        authorNameLabel.text = article.author?.name
+        descriptionLabel.text = article.message
+        let dateData = article.date
+        let day =  (dateData?.day) ?? ""
+        let month = (dateData?.month) ?? ""
+        let year =  (dateData?.year) ?? ""
+        
+        let date = day + " " + month + " " + year
+        
+        dateLabel.text = date
+        
+        
         
     }
     

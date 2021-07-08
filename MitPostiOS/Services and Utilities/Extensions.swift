@@ -54,6 +54,72 @@ extension UIView {
         return anchors
     }
     
+    func fillSuperview(padding: UIEdgeInsets = .zero) {
+        translatesAutoresizingMaskIntoConstraints = false
+        if let superviewTopAnchor = superview?.topAnchor {
+            topAnchor.constraint(equalTo: superviewTopAnchor, constant: padding.top).isActive = true
+        }
+        
+        if let superviewBottomAnchor = superview?.bottomAnchor {
+            bottomAnchor.constraint(equalTo: superviewBottomAnchor, constant: -padding.bottom).isActive = true
+        }
+        
+        if let superviewLeadingAnchor = superview?.leadingAnchor {
+            leadingAnchor.constraint(equalTo: superviewLeadingAnchor, constant: padding.left).isActive = true
+        }
+        
+        if let superviewTrailingAnchor = superview?.trailingAnchor {
+            trailingAnchor.constraint(equalTo: superviewTrailingAnchor, constant: -padding.right).isActive = true
+        }
+    }
+    
+    func setDimensions(width: CGFloat, height: CGFloat) {
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalToConstant: width).isActive = true
+        heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    
+    func center(inView view: UIView, yConstant: CGFloat? = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: yConstant!).isActive = true
+    }
+    
+    func centerX(inView view: UIView, topAnchor: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        if let topAnchor = topAnchor {
+            self.topAnchor.constraint(equalTo: topAnchor, constant: paddingTop!).isActive = true
+        }
+    }
+    
+    func centerX(inView view: UIView, bottomAnchor: NSLayoutYAxisAnchor? = nil, paddingBottom: CGFloat? = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        if let bottomAnchor = bottomAnchor {
+            self.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -paddingBottom!).isActive = true
+        }
+    }
+    
+    func centerY(inView view: UIView, leftAnchor: NSLayoutXAxisAnchor? = nil, paddingLeft: CGFloat? = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        if let leftAnchor = leftAnchor, let padding = paddingLeft {
+            self.leftAnchor.constraint(equalTo: leftAnchor, constant: padding).isActive = true
+        }
+    }
+    
+    
+    func addConstraintsToFillView(_ view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        anchor(top: view.topAnchor, left: view.leftAnchor,
+               bottom: view.bottomAnchor, right: view.rightAnchor)
+    }
+    
 }
 
 extension UIViewController {
