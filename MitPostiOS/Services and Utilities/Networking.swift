@@ -45,6 +45,7 @@ struct Networking{
     fileprivate let articlesURL = "https://app.themitpost.com/posts"
     fileprivate let noticesURL = "https://app.themitpost.com/notices"
     fileprivate let instaURL = "https://app.themitpost.com/social/instagram/posts"
+    fileprivate let magazineURL = "https://app.themitpost.com/magazines"
     
     static let sharedInstance = Networking()
     
@@ -121,8 +122,31 @@ struct Networking{
             }
         }
         dataTask.resume()
+    }
+    
+    func getMagazineData(method : String ,dataCompletion: @escaping (_ Data: Magazines) -> (),  errorCompletion: @escaping (_ ErrorMessage: Error) -> ()){
         
-        
+        guard let url = URL(string: magazineURL) else {return}
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
+        let session = URLSession(configuration: .default)
+        let dataTask = session.dataTask(with: urlRequest) { data, response, error in
+            if let err = error {
+                errorCompletion(err)
+                print(err.localizedDescription)
+                return
+            }
+            guard response != nil, let data = data else {
+                return
+            }
+            let responseObject = try! JSONDecoder().decode(Magazines.self, from: data)
+            
+
+            DispatchQueue.main.async {
+                dataCompletion(responseObject)
+            }
+        }
+        dataTask.resume()
     }
 }
         

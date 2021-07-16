@@ -12,14 +12,14 @@ class EventsTableViewController: UITableViewController {
 //    MARK:- Properties
     private let articleCellID = "ArticleCell"
     
-    
-    
-    
-    
-    
-    
-    
-    
+    var articles : [ArticleModel]?{
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+ 
     
 //    MARK:- Lifecycle functions
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class EventsTableViewController: UITableViewController {
         view.backgroundColor = UIColor(named: "defaultBG")
         setupNavigationBar()
         configureTableView()
+        getArticles()
     }
     
     
@@ -59,6 +60,20 @@ class EventsTableViewController: UITableViewController {
         print("Do something")
         let vc = InfoTableViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getArticles(){
+        var filteredArticles = [ArticleModel]()
+        Networking.sharedInstance.getArticleData(method: HTTPMethods.get.description, dataCompletion: { articleData in
+            for i in articleData{
+                if( i.category == "Event Reports"){
+                    filteredArticles.append(i)
+                }
+            }
+            self.articles = filteredArticles
+        }, errorCompletion: { err in
+            print("Error in fetching article/post data", err)
+        })
     }
     
     
@@ -101,7 +116,7 @@ class EventsTableViewController: UITableViewController {
             return 1
             
         case 1:
-            return 5
+            return articles?.count ?? 0
             
         default:
             return 0
@@ -110,7 +125,7 @@ class EventsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.section == 0){
-            return 250
+            return 280
         }else{
             return UITableView.automaticDimension
         }
@@ -121,15 +136,33 @@ class EventsTableViewController: UITableViewController {
         switch indexPath.section{
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath)
+            cell.selectionStyle = .none
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: articleCellID, for: indexPath) as! ArticleCell
+            cell.selectionStyle = .none
+            cell.articleData = articles?[indexPath.row]
             return cell
          
         default:
             return UITableViewCell()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if articles?.count == 0{
+            return
+        }
+        guard let url = articles![indexPath.item].link else {return }
+        openWebView(urlString: url)
+    }
+    
+    private func openWebView(urlString : String){
+        let vc = ArticleWebViewController()
+        vc.webURL = urlString
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

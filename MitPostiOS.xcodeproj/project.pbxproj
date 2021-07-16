@@ -16,6 +16,10 @@
 		C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE558268902690003C6F4 /* EventsTableViewController.swift */; };
 		C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */; };
 		C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */; };
+		C60CBE52269DC3160053D0F9 /* MagazineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE51269DC3160053D0F9 /* MagazineModel.swift */; };
+		C60CBE54269DCB9D0053D0F9 /* MagazineCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE53269DCB9D0053D0F9 /* MagazineCollectionViewController.swift */; };
+		C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE55269DCCD40053D0F9 /* MagazineCell.swift */; };
+		C60CBE58269DE2290053D0F9 /* MagazinePDFController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE57269DE2290053D0F9 /* MagazinePDFController.swift */; };
 		C64B083F268A49D800696FEA /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B083E268A49D800696FEA /* Networking.swift */; };
 		C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0840268A50ED00696FEA /* ArticleCell.swift */; };
 		C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0842268A5FB000696FEA /* ArticleModel.swift */; };
@@ -24,6 +28,8 @@
 		C67005162690F30A00878694 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005152690F30A00878694 /* Caching.swift */; };
 		C67005182690F74A00878694 /* SocialModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005172690F74A00878694 /* SocialModels.swift */; };
 		C670051A2690F95B00878694 /* InstagramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005192690F95B00878694 /* InstagramCollectionViewCell.swift */; };
+		C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674B0A126A13A3000BB3D20 /* NoticeCell.swift */; };
+		C674B0A526A13CE500BB3D20 /* ArticleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */; };
 		C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */; };
 		C6C8C559268CD033008A6799 /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */; };
 		C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */; };
@@ -47,6 +53,10 @@
 		C60AE558268902690003C6F4 /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
 		C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticesTableViewController.swift; sourceTree = "<group>"; };
 		C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
+		C60CBE51269DC3160053D0F9 /* MagazineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineModel.swift; sourceTree = "<group>"; };
+		C60CBE53269DCB9D0053D0F9 /* MagazineCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineCollectionViewController.swift; sourceTree = "<group>"; };
+		C60CBE55269DCCD40053D0F9 /* MagazineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineCell.swift; sourceTree = "<group>"; };
+		C60CBE57269DE2290053D0F9 /* MagazinePDFController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazinePDFController.swift; sourceTree = "<group>"; };
 		C64B083E268A49D800696FEA /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C64B0840268A50ED00696FEA /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		C64B0842268A5FB000696FEA /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
@@ -55,6 +65,8 @@
 		C67005152690F30A00878694 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		C67005172690F74A00878694 /* SocialModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialModels.swift; sourceTree = "<group>"; };
 		C67005192690F95B00878694 /* InstagramCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramCollectionViewCell.swift; sourceTree = "<group>"; };
+		C674B0A126A13A3000BB3D20 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
+		C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleWebView.swift; sourceTree = "<group>"; };
 		C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCell.swift; sourceTree = "<group>"; };
 		C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
 		C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramHorizontalController.swift; sourceTree = "<group>"; };
@@ -130,8 +142,28 @@
 			children = (
 				C6FDE0072688F8BF00CBC270 /* ArticleViewController.swift */,
 				C666AA322690B17800C37684 /* SearchTagsController.swift */,
+				C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C674B0A026A1397E00BB3D20 /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				C60CBE55269DCCD40053D0F9 /* MagazineCell.swift */,
+				C60CBE57269DE2290053D0F9 /* MagazinePDFController.swift */,
+				C60CBE53269DCB9D0053D0F9 /* MagazineCollectionViewController.swift */,
+				C60CBE51269DC3160053D0F9 /* MagazineModel.swift */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		C674B0A326A13BD500BB3D20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C67005172690F74A00878694 /* SocialModels.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C67EA1742696E5D00020CDD1 /* Notice */ = {
@@ -139,6 +171,7 @@
 			children = (
 				C67EA1762696E5EB0020CDD1 /* Model */,
 				C67EA1752696E5DA0020CDD1 /* Controller */,
+				C674B0A126A13A3000BB3D20 /* NoticeCell.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -172,7 +205,7 @@
 			children = (
 				C6C8C55E268CDF0A008A6799 /* View */,
 				C6C8C55D268CDEEA008A6799 /* Controller */,
-				C67005172690F74A00878694 /* SocialModels.swift */,
+				C674B0A326A13BD500BB3D20 /* Model */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -200,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				C64B083E268A49D800696FEA /* Networking.swift */,
+				C67005152690F30A00878694 /* Caching.swift */,
 				C60AE54D2688FCD80003C6F4 /* Extensions.swift */,
 			);
 			path = "Services and Utilities";
@@ -229,6 +263,7 @@
 				C6FDE00C2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld */,
 				C6FDE0142688F8C100CBC270 /* Info.plist */,
 				C6FDE00F2688F8C100CBC270 /* Assets.xcassets */,
+				C674B0A026A1397E00BB3D20 /* Magazine */,
 				C60AE54F2688FDEC0003C6F4 /* Master */,
 				C64B0844268A61E800696FEA /* Articles */,
 				C6C8C55C268CDEDF008A6799 /* Social */,
@@ -238,7 +273,6 @@
 				C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */,
 				C6FDE0112688F8C100CBC270 /* LaunchScreen.storyboard */,
 				C6C8C55F268CDF20008A6799 /* Services and Utilities */,
-				C67005152690F30A00878694 /* Caching.swift */,
 			);
 			path = MitPostiOS;
 			sourceTree = "<group>";
@@ -369,21 +403,27 @@
 				C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */,
 				C6FDE0082688F8BF00CBC270 /* ArticleViewController.swift in Sources */,
 				C6FDE0042688F8BF00CBC270 /* AppDelegate.swift in Sources */,
+				C60CBE54269DCB9D0053D0F9 /* MagazineCollectionViewController.swift in Sources */,
 				C64B083F268A49D800696FEA /* Networking.swift in Sources */,
 				C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */,
+				C674B0A526A13CE500BB3D20 /* ArticleWebView.swift in Sources */,
 				C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */,
 				C6C8C559268CD033008A6799 /* InstagramTableViewCell.swift in Sources */,
 				C666AA332690B17800C37684 /* SearchTagsController.swift in Sources */,
 				C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */,
 				C60AE555268901FD0003C6F4 /* SocialTableViewController.swift in Sources */,
+				C60CBE52269DC3160053D0F9 /* MagazineModel.swift in Sources */,
+				C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */,
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
+				C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */,
 				C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */,
 				C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */,
 				C67005162690F30A00878694 /* Caching.swift in Sources */,
 				C67005142690EFA600878694 /* NoticeModel.swift in Sources */,
 				C670051A2690F95B00878694 /* InstagramCollectionViewCell.swift in Sources */,
 				C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */,
+				C60CBE58269DE2290053D0F9 /* MagazinePDFController.swift in Sources */,
 				C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */,
 				C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */,
 				C67005182690F74A00878694 /* SocialModels.swift in Sources */,

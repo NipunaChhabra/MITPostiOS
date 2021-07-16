@@ -65,6 +65,13 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
         getArticles()
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+
+//        self.articleTableView.deselectRow(at: , animated: true)
+    }
+    
     func getArticles(){
         
         Networking.sharedInstance.getArticleData(method: HTTPMethods.get.description, dataCompletion: { articleData in
@@ -77,9 +84,10 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func infoPressed(){
-        let vc = InfoTableViewController()
+        let vc =  MagazineViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        //InfoTableViewController()
+//        let nav = UINavigationController(rootViewController: vc)
         navigationController?.pushViewController(vc, animated: true)
-        print(123)
     }
     
     
@@ -138,10 +146,26 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: articleCellID, for: indexPath) as! ArticleCell
-        
+        cell.selectionStyle = .none
         cell.articleData = filteredArticles?[indexPath.row] ?? nil
         cell.backgroundColor = .clear
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if filteredArticles?.count == 0{
+            return
+        }
+        guard let url = filteredArticles![indexPath.item].link else {return }
+        
+        openWebView(urlString: url)
+    }
+    
+    private func openWebView(urlString : String){
+        let vc = ArticleWebViewController()
+        vc.webURL = urlString
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
      func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

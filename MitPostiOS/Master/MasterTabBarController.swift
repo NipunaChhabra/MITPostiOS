@@ -16,12 +16,13 @@ class MasterTabBarController : UITabBarController{
 //        tabBar.barTintColor = UIColor.CustomColors.Black.background
         tabBar.tintColor = .orange
         setupTabs()
+        fetchMagazines()
         
     }
     
     private func setupTabs(){
         let vc1 = ArticleViewController()
-        let articleViewNavController = UINavigationController(rootViewController: vc1)
+        let articleViewNavController = MasterNavigationBarController(rootViewController: vc1)
         articleViewNavController.tabBarItem = UITabBarItem(title: "Articles", image: UIImage(systemName: "newspaper"), tag: 0)
         
         let vc2 = SocialTableViewController(style: .grouped)
@@ -46,5 +47,10 @@ class MasterTabBarController : UITabBarController{
         
         viewControllers = [articleViewNavController,socialNavController,slcmNavController,eventsNavController,noticesNavController]
     }
+    
+    
+    func fetchMagazines(){
+    }
+    
     
 }

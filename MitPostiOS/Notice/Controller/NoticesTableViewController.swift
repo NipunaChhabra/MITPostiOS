@@ -12,26 +12,13 @@ class NoticesTableViewController: UITableViewController {
 //    MARK: -Properties
     
     
+    var notices : [Notice]?{
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 //    MARK: - Lifecycle functions
 
@@ -41,13 +28,8 @@ class NoticesTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
         setupNavigationBar()
         configureTableView()
-       getNotices()
+        getNotices()
     }
-    
-    
-    
-    
-    
     
     
     
@@ -116,7 +98,13 @@ class NoticesTableViewController: UITableViewController {
     }
    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        
+        if section == 0{
+            return 3
+        }else{
+            return (notices?.count ?? 0)
+        }
+       
     }
     
     

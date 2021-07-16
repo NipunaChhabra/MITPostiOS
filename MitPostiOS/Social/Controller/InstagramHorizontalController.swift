@@ -77,6 +77,17 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
         }
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if instagramData?.count == 0{
+            return
+        }
+        let url = instagramData![indexPath.item].link
+        let webURL = NSURL(string: url!)!
+        let application = UIApplication.shared
+        application.open(webURL as URL)
+        return
+    }
 
     
     //MARK: - UICollectionViewDelegateFlowLayout

@@ -7,6 +7,94 @@
 
 import UIKit
 
+
+class SocialHeaderView : UIView{
+    
+    lazy var facebookButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "play.rectangle.fill")?.withTintColor(UIColor(named: "defaultBG") ?? .clear, renderingMode: .alwaysOriginal), for: .normal)
+        if UIViewController().isSmalliPhone(){
+            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        }else{
+            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        }
+//        button.backgroundColor = .white
+//        button.startAnimatingPressActions()
+        button.tag = 0
+//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    lazy var instaButton : UIButton = {
+        let button = UIButton()
+//        button.setImage(UIImage(named: "youtube"), for: .normal)
+        if UIViewController().isSmalliPhone(){
+            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        }else{
+            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        }
+        button.backgroundColor = .white
+//        button.startAnimatingPressActions()
+        button.tag = 2
+//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    lazy var twitterButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "twitter"), for: .normal)
+        if UIViewController().isSmalliPhone(){
+            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        }else{
+            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        }
+        button.backgroundColor = .white
+//        button.startAnimatingPressActions()
+        button.tag = 1
+//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    lazy var linkedInButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "bird"), for: .normal)
+        if UIViewController().isSmalliPhone(){
+            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        }else{
+            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        }
+        button.backgroundColor = .white
+//        button.startAnimatingPressActions()
+        button.tag = 1
+//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let stackView = UIStackView(arrangedSubviews: [instaButton,twitterButton,facebookButton,linkedInButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        
+        addSubview(stackView)
+        _ = stackView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, heightConstant: UIViewController().view.frame.width/4)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class SocialTableViewController: UITableViewController {
     
 //    MARK: -Properties
@@ -17,12 +105,12 @@ class SocialTableViewController: UITableViewController {
     lazy var followInstaButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.systemOrange, for: .normal)
-        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
+//        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         button.layer.cornerRadius = 13
         button.isUserInteractionEnabled = true
         button.setTitle("FOLLOW", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.addTarget(self, action: #selector(handleInstaFollow), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -31,12 +119,12 @@ class SocialTableViewController: UITableViewController {
     lazy var followTwitterButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.systemOrange, for: .normal)
-        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
+//        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         button.layer.cornerRadius = 13
         button.isUserInteractionEnabled = true
         button.setTitle("FOLLOW", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.addTarget(self, action: #selector(handleTwitterFollow), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -52,7 +140,7 @@ class SocialTableViewController: UITableViewController {
         headerLabel.text = "Instagram Posts"
 
         headerView.addSubview(followInstaButton)
-       _ = followInstaButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 10, heightConstant: 28)
+       _ = followInstaButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 28)
         
         
         headerView.addSubview(headerLabel)
@@ -71,7 +159,7 @@ class SocialTableViewController: UITableViewController {
         headerView.isUserInteractionEnabled = true
         
         headerView.addSubview(followTwitterButton)
-       _ = followTwitterButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 10, heightConstant: 28)
+       _ = followTwitterButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 28)
         
         headerView.addSubview(headerLabel)
         _ = headerLabel.anchor(top: headerView.topAnchor, left: headerView.leftAnchor, bottom: nil, right:nil, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 0, heightConstant: 30)
@@ -101,8 +189,8 @@ class SocialTableViewController: UITableViewController {
     
     fileprivate func setupTableView(){
         let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 180)
-        let headerView = UIView(frame: frame)
-        headerView.backgroundColor = .white
+        let headerView = SocialHeaderView(frame: frame)
+//        headerView.backgroundColor = .white
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
         //Cells
