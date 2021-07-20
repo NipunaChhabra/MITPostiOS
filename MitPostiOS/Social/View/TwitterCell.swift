@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TwitterTableViewCell : UITableViewCell{
+class TwitterTableViewCell : SocialCell{
     
     lazy var tweetView: UIView = {
         let view = UIView()

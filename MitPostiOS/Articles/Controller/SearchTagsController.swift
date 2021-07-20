@@ -89,7 +89,7 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             
-            let font = UIFont.systemFont(ofSize: 16)
+            _ = UIFont.systemFont(ofSize: 16)
             let tag = self.tags[indexPath.item]
             let width: CGFloat!
             width = tag.width(withConstrainedHeight: 35, font: UIFont.systemFont(ofSize: 16, weight: .regular)) + 48

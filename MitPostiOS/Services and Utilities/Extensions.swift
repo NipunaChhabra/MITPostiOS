@@ -272,7 +272,7 @@ class FileDownloader {
         {
             let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
             var request = URLRequest(url: url)
-            request.httpMethod = "GET"
+            request.httpMethod = HTTPMethods.get.description
             let task = session.dataTask(with: request, completionHandler:
             {
                 data, response, error in

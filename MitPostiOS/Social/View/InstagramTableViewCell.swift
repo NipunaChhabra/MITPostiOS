@@ -8,15 +8,27 @@
 import Foundation
 import UIKit
 
-class InstagramTableViewCell : UITableViewCell{
+protocol InstaViewDelegate: AnyObject{
+    func makeInstaFS(cell : UICollectionViewCell, indexPath: IndexPath, instaPostData : Instagram)
+}
+
+
+class SocialCell: UITableViewCell{
     
+   
+}
+
+class InstagramTableViewCell :UITableViewCell{
     
+    var instaDelegate: InstaViewDelegate?
     var horizontalController = InstagramHorizontalController()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor(named: "defaultBG")
         contentView.addSubview(horizontalController.view)
+        horizontalController.instaDelegate = self
         let horizontalView = horizontalController.view!
         _ = horizontalView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor,  topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
        
@@ -26,4 +38,12 @@ class InstagramTableViewCell : UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension InstagramTableViewCell: InstaFullScreenDelegate{
+    func makeInstagramFS(cell: UICollectionViewCell, indexPath: IndexPath, instaPostData: Instagram) {
+        self.instaDelegate?.makeInstaFS(cell: cell, indexPath: indexPath, instaPostData: instaPostData)
+    }
+    
+    
 }

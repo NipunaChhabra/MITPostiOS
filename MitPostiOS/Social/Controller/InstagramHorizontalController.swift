@@ -9,6 +9,10 @@ import UIKit
 
 private let instaReuseIdentifier = "InstagramCell"
 
+protocol InstaFullScreenDelegate {
+    func makeInstagramFS(cell : UICollectionViewCell, indexPath :IndexPath, instaPostData : Instagram)
+}
+
 class InstagramHorizontalController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
     
@@ -19,6 +23,8 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
             self.collectionView.reloadData()
         }
     }
+    
+    var instaDelegate: InstaFullScreenDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,11 +76,8 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: instaReuseIdentifier, for: indexPath) as! InstagramCell
         cell.layer.cornerRadius = 10
         if let imageURL = instagramData?[indexPath.item].imageUrl{
-            if let imURL = URL(string: imageURL){
-//            cell.fetchImage(imageURL: imURL)
         cell.instaPostImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
             }
-        }
         return cell
     }
     
@@ -82,13 +85,11 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
         if instagramData?.count == 0{
             return
         }
-        let url = instagramData![indexPath.item].link
-        let webURL = NSURL(string: url!)!
-        let application = UIApplication.shared
-        application.open(webURL as URL)
-        return
+        guard let instaData = instagramData?[indexPath.item] else {return }
+        
+        guard let cell = collectionView.cellForItem(at: indexPath)  else {return }
+        self.instaDelegate?.makeInstagramFS(cell: cell, indexPath: indexPath, instaPostData: instaData)
     }
-
     
     //MARK: - UICollectionViewDelegateFlowLayout
 

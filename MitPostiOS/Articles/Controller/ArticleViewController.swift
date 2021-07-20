@@ -117,7 +117,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
         tagsController.delegate = self
         tagsController.indexValue = 0
         let tagsView = tagsController.view!
-//        view.backgroundColor = .clear
+        tagsController.specialColor = UIColor.systemOrange
 //
         view.addSubview(tagsView)
         _ = tagsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 50)

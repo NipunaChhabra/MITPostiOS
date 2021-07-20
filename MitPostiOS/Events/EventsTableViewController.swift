@@ -155,14 +155,19 @@ class EventsTableViewController: UITableViewController {
             return
         }
         guard let url = articles![indexPath.item].link else {return }
+        if indexPath.section == 1{
         openWebView(urlString: url)
+        }
     }
     
     private func openWebView(urlString : String){
         let vc = ArticleWebViewController()
         vc.webURL = urlString
+        vc.fromEventReports = true
         vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        let nav = MasterNavigationBarController(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

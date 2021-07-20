@@ -6,11 +6,9 @@ target 'MitPostiOS' do
   use_frameworks!
 
   # Pods for MitPostiOS
-	pod 'Alamofire'
 	pod 'Disk'
 	pod 'SDWebImage'
 	pod 'FloatingPanel'
-	pod 'BEMCheckBox'
 	
 
 end

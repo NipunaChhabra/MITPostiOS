@@ -107,6 +107,7 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.collectionView.isUserInteractionEnabled = false
         if let pdfLink = magazines?[indexPath.item].pdfLink{
             let url: URL! = URL(string: pdfLink)
             if let title = magazines?[indexPath.item].title{
@@ -121,6 +122,7 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
         vc.pdfTitle = pdfTitle
         vc.hidesBottomBarWhenPushed = true
         FileDownloader.loadFileAsync(url: pdfURL) { pdfLocation, error in
+            self.collectionView.isUserInteractionEnabled = true
             vc.pdfLink = pdfLocation ?? ""
             DispatchQueue.main.async {
                 self.navigationController?.pushViewController(vc, animated: true)

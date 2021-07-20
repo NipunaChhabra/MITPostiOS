@@ -24,6 +24,7 @@
 		C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0840268A50ED00696FEA /* ArticleCell.swift */; };
 		C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0842268A5FB000696FEA /* ArticleModel.swift */; };
 		C666AA332690B17800C37684 /* SearchTagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666AA322690B17800C37684 /* SearchTagsController.swift */; };
+		C667929A26A721C000438A59 /* InstaFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C667929926A721C000438A59 /* InstaFullScreenController.swift */; };
 		C67005142690EFA600878694 /* NoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005132690EFA600878694 /* NoticeModel.swift */; };
 		C67005162690F30A00878694 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005152690F30A00878694 /* Caching.swift */; };
 		C67005182690F74A00878694 /* SocialModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005172690F74A00878694 /* SocialModels.swift */; };
@@ -61,6 +62,7 @@
 		C64B0840268A50ED00696FEA /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		C64B0842268A5FB000696FEA /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		C666AA322690B17800C37684 /* SearchTagsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTagsController.swift; sourceTree = "<group>"; };
+		C667929926A721C000438A59 /* InstaFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaFullScreenController.swift; sourceTree = "<group>"; };
 		C67005132690EFA600878694 /* NoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeModel.swift; sourceTree = "<group>"; };
 		C67005152690F30A00878694 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		C67005172690F74A00878694 /* SocialModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialModels.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */,
 				C60AE554268901FD0003C6F4 /* SocialTableViewController.swift */,
+				C667929926A721C000438A59 /* InstaFullScreenController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
 				C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */,
+				C667929A26A721C000438A59 /* InstaFullScreenController.swift in Sources */,
 				C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */,
 				C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */,
 				C67005162690F30A00878694 /* Caching.swift in Sources */,

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SocialHeaderView : UIView{
     
     lazy var facebookButton: UIButton = {
@@ -95,12 +94,15 @@ class SocialHeaderView : UIView{
     }
 }
 
-class SocialTableViewController: UITableViewController {
+class SocialTableViewController: UITableViewController{
+    
     
 //    MARK: -Properties
     
     private let twitterCellId = "TwitterCell"
     private let instagramCellId = "InstagramCell"
+    
+    var instaVC : InstaFullScreenController!
     
     lazy var followInstaButton: UIButton = {
         let button = UIButton()
@@ -165,6 +167,9 @@ class SocialTableViewController: UITableViewController {
         _ = headerLabel.anchor(top: headerView.topAnchor, left: headerView.leftAnchor, bottom: nil, right:nil, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 0, heightConstant: 30)
         return headerView
     }()
+    
+    
+    var startingFrame: CGRect?
     
     
     
@@ -255,6 +260,8 @@ class SocialTableViewController: UITableViewController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: instagramCellId, for: indexPath) as! InstagramTableViewCell
+            cell.instaDelegate = self
+            
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: twitterCellId, for: indexPath) as! TwitterTableViewCell
@@ -296,4 +303,64 @@ class SocialTableViewController: UITableViewController {
     
     
 
+}
+
+
+extension SocialTableViewController :  InstaViewDelegate {
+    
+    func makeInstaFS(cell: UICollectionViewCell, indexPath: IndexPath , instaPostData : Instagram) {
+        let instaVC = InstaFullScreenController()
+        instaVC.hidesBottomBarWhenPushed = true
+        instaVC.instaPostData = instaPostData
+    
+        let instaView = instaVC.view!
+        
+        
+        instaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeInstaVC)))
+        
+        self.tableView.addSubview(instaView)
+        
+        addChild(instaVC)
+        
+        self.instaVC = instaVC
+       
+        guard let startingFrame = cell.superview?.convert(cell.frame, to: nil) else {return }
+        
+        self.startingFrame = startingFrame
+        instaView.frame = startingFrame
+        instaView.layer.cornerRadius = 10
+     
+     
+         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            instaView.frame = self.view.frame
+            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height+100
+            self.tableView.isScrollEnabled = false
+
+//            self.tabBarController?.tabBar.transform = CGAffineTransform(translationX: 0, y: 100)
+         } completion: { b in
+             //Do nothing
+         }
+    }
+    
+    
+    @objc func removeInstaVC(gesture : UITapGestureRecognizer){
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut) {
+            gesture.view?.frame = self.startingFrame ?? .zero
+            self.tabBarController?.tabBar.frame.origin.y -= 100
+            self.tableView.isScrollEnabled = true
+
+//            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height - 100
+            if let tabBarFrame = self.tabBarController?.tabBar.frame {
+//                self.tabBarController?.tabBar.frame..origin.y = self.view.framw.height-80
+                
+               }
+        } completion: { _ in
+            gesture.view?.removeFromSuperview()
+            self.instaVC.removeFromParent()
+        }
+        
+        
+    }
 }
