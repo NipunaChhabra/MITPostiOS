@@ -23,7 +23,7 @@ class ArticleCell : UITableViewCell{
         bg.backgroundColor = UIColor(named: "articleCellBG")
         bg.layer.cornerRadius = 10
         bg.layer.borderWidth = 0.4
-        bg.layer.borderColor = UIColor.gray.cgColor
+        bg.layer.borderColor = UIColor.systemGray2.cgColor
 //        bg.backgroundColor = UIColor(white: 1, alpha: 1)
 //        bg.layer.cornerRadius = 40
         return bg
@@ -33,12 +33,13 @@ class ArticleCell : UITableViewCell{
     lazy var postImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.layer.masksToBounds = false
+        iv.layer.masksToBounds = true
+        iv.clipsToBounds = true
         iv.layer.cornerRadius = 10
 //        iv.
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.backgroundColor = .gray
-        iv.clipsToBounds = true
+        
         
         return iv
         }()
@@ -48,18 +49,23 @@ class ArticleCell : UITableViewCell{
         label.text = "Checking post Title wsdfsdfsdfsdfsjfbsjfhfbdjhbfhjdsbfhjdsbfjdbfd\n sdfsdfsdfsfsdfbbsdfs"
 //        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 21)
+        
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.boldSystemFont(ofSize: 18)
+        }else{
+            label.font = UIFont.boldSystemFont(ofSize: 21)
+        }
         label.numberOfLines = 0
         return label
     }()
     
     lazy var authorNameLabel: UILabel = {
         let label  = UILabel()
-//        if UIViewController().isSmalliPhone(){
-//            label.font = UIFont.systemFont(ofSize: 16)
-//        }else{
-//            label.font = UIFont.systemFont(ofSize: 20)
-        
+      if UIViewController().isSmalliPhone(){
+        label.font = UIFont.italicSystemFont(ofSize: 13)
+    }else{
         label.font = UIFont.italicSystemFont(ofSize: 15)
+    }
         label.textColor = .gray
         label.numberOfLines = 1
         label.text = "Rohit Kuber"
@@ -75,8 +81,12 @@ class ArticleCell : UITableViewCell{
 //            label.font = UIFont.systemFont(ofSize: 16)
 //        }else{
 //            label.font = UIFont.systemFont(ofSize: 20)
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.italicSystemFont(ofSize: 13)
+        }else{
+            label.font = UIFont.italicSystemFont(ofSize: 15)
+        }
         
-        label.font = UIFont.italicSystemFont(ofSize: 15)
         label.textColor = .gray
         label.numberOfLines = 1
         label.text = ""
@@ -86,15 +96,13 @@ class ArticleCell : UITableViewCell{
     
     lazy var descriptionLabel: UILabel = {
         let label  = UILabel()
-//        if UIViewController().isSmalliPhone(){
-//            label.font = UIFont.systemFont(ofSize: 16)
-//        }else{
-//            label.font = UIFont.systemFont(ofSize: 20)
-        
-        label.font = UIFont.systemFont(ofSize: 17)
-        
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.systemFont(ofSize: 15)
+        }else{
+            label.font = UIFont.systemFont(ofSize: 17)
+        }
         label.numberOfLines = 0
-        label.text = "w;kwkerwewer  dfjsdnflsfmlksmfklsmflksmflsmdflsmflksmfklsmf\n adfsdf sdfsdf\n skdjfnsjkdfnjksdnfskdfnkjsnfdkjsndfjksndfkjsndfkjsdnfkjsndfjksndfkjnf"
+        label.text = ""
         label.textAlignment = .left
         return label
     }()
@@ -124,7 +132,7 @@ class ArticleCell : UITableViewCell{
         addSubview(descriptionLabel)
         _ = descriptionLabel.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 10, rightConstant: 20)
         
-        _ = backgroundCard.anchor(top: postImageView.topAnchor, left: leftAnchor, bottom: descriptionLabel.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: -8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        _ = backgroundCard.anchor(top: postImageView.topAnchor, left: leftAnchor, bottom: descriptionLabel.bottomAnchor, right: rightAnchor, topConstant: -0.5, leftConstant: 10, bottomConstant: -8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
     }
     

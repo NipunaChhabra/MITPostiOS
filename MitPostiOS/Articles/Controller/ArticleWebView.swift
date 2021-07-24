@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import WebKit
 
-class ArticleWebViewController : UIViewController{
+class ArticleWebViewController : UIViewController, WKNavigationDelegate{
     
     
     var fromEventReports: Bool = false
@@ -40,6 +40,7 @@ class ArticleWebViewController : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
         
         view.addSubview(webView)
         webView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
@@ -58,6 +59,33 @@ class ArticleWebViewController : UIViewController{
             fromEventReports = false
         }
     }
+ 
+        var isInitialLoad = true
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+
+            if self.isInitialLoad {
+                self.isInitialLoad = false
+            } else {
+                webView.stopLoading()
+            }
+        }
+    
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        if let url = navigationAction.request.url?.absoluteString{
+//
+//        if self.isInitialLoad
+//            {
+//            self.isInitialLoad = false
+//            }
+//            else
+//            {
+//                decisionHandler(.cancel)
+////                UIApplication.shared.open(navigationAction.request.url ?? " " , options: [:], completionHandler: nil)
+//            }
+//
+//        }
+//    }
     
     @objc fileprivate func handleShare(){
         

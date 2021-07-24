@@ -17,6 +17,9 @@ class MasterTabBarController : UITabBarController{
         tabBar.tintColor = .orange
         setupTabs()
         fetchMagazines()
+        getArticles()
+        getNotices()
+        getInstagramData()
         
     }
     
@@ -48,8 +51,45 @@ class MasterTabBarController : UITabBarController{
         viewControllers = [articleViewNavController,socialNavController,slcmNavController,eventsNavController,noticesNavController]
     }
     
-    
+//    MARK:- API Calls
     func fetchMagazines(){
+        var magazines = [MagazineData]()
+        Networking.sharedInstance.getMagazineData(method: HTTPMethods.get.description) { magazineData in
+            magazines = magazineData.data.reversed()
+            Caching.sharedInstance.saveMagazinesToCache(magazines: magazines)
+        } errorCompletion: { error in
+         print("Error in fetching magazines" , error)
+        }
+    }
+    
+    func getArticles(){
+        var articles = [ArticleModel]()
+        Networking.sharedInstance.getArticleData(method: HTTPMethods.get.description, dataCompletion: { articleData in
+            articles = articleData
+            Caching.sharedInstance.saveArticlesToCache(article: articles)
+        }, errorCompletion: { err in
+            print("Error in fetching article/post data", err)
+        })
+    }
+    
+    func getNotices(){
+        var notices = [Notice]()
+        Networking.sharedInstance.getNoticeData(method: HTTPMethods.get.description) { noticeData in
+            notices = noticeData.reversed()
+            Caching.sharedInstance.saveNoticesToCache(notices: notices)
+        } errorCompletion: { err in
+            print("Error in fetching notices" , err)
+        }
+    }
+    
+    func getInstagramData(){
+        var instagramData = [Instagram]()
+        Networking.sharedInstance.getInstagramData(method: HTTPMethods.get.description) { instaData in
+            instagramData = instaData
+            Caching.sharedInstance.saveInstagramDataToCache(instagramData: instagramData)
+        } errorCompletion: { err in
+            print("Error in fetching Instagram Data", err)
+        }
     }
     
     

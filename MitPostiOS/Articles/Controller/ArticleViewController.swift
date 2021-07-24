@@ -6,12 +6,15 @@
 //
 
 import UIKit
-import Alamofire
+import SafariServices
+import Disk
 
 class ArticleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SearchTagsControllerDelegate {
     
     
 //    MARK:-  Properties
+    
+    var indexValue: Int?
     
     var filteredArticles: [ArticleModel]?{
         didSet{
@@ -62,14 +65,30 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
         setupNavigationBar()
         navigationItem.largeTitleDisplayMode = .never
         setupUI()
-        getArticles()
+        getCachedArticles()
+//        getArticles()
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-
-//        self.articleTableView.deselectRow(at: , animated: true)
+        if indexValue != nil{
+            tagsController.indexValue = indexValue
+            tagsController.collectionView.reloadData()
+        }
+    }
+    
+    func getCachedArticles(){
+        do{
+            let retrievedArticles = try Disk.retrieve(articlesCache, from: .caches, as: [ArticleModel].self)
+            self.filteredArticles = retrievedArticles
+            self.articles = retrievedArticles
+            self.tagsController.view.isHidden = false
+        }
+        catch let error{
+            print("Articles cache error in ArticleController: ", error)
+            getArticles()
+        }
     }
     
     func getArticles(){
@@ -92,6 +111,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func didTapTag(indexPath: IndexPath) {
+        self.indexValue = indexPath.item
         let tag = tags[indexPath.item]
         if tag == "All"{
             self.filteredArticles = self.articles
@@ -115,7 +135,11 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     
     private func setupUI(){
         tagsController.delegate = self
-        tagsController.indexValue = 0
+        if self.indexValue != nil{
+            tagsController.indexValue = indexValue
+        }else{
+            tagsController.indexValue = 0
+        }
         let tagsView = tagsController.view!
         tagsController.specialColor = UIColor.systemOrange
 //
@@ -162,10 +186,13 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     private func openWebView(urlString : String){
-        let vc = ArticleWebViewController()
-        vc.webURL = urlString
-        vc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let url = URL(string: urlString) {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+
+               let vc = SFSafariViewController(url: url, configuration: config)
+               present(vc, animated: true)
+        }
     }
     
      func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

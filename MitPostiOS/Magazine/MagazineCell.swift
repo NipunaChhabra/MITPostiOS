@@ -67,7 +67,7 @@ class MagazineCell : UICollectionViewCell{
     
     lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 236.0/255.0, green: 236.0/255.0, blue: 236.0/255.0, alpha: 0.8)
+        view.backgroundColor = .systemGray2//UIColor(red: 236.0/255.0, green: 236.0/255.0, blue: 236.0/255.0, alpha: 0.8)
         return view
     }()
     

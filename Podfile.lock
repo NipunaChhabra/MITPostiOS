@@ -1,34 +1,30 @@
 PODS:
-  - Alamofire (5.4.1)
-  - BEMCheckBox (1.4.1)
   - Disk (0.6.4)
   - FloatingPanel (2.3.0)
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
+  - STTwitter (0.2.6)
 
 DEPENDENCIES:
-  - Alamofire
-  - BEMCheckBox
   - Disk
   - FloatingPanel
   - SDWebImage
+  - STTwitter
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - BEMCheckBox
     - Disk
     - FloatingPanel
     - SDWebImage
+    - STTwitter
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Disk: dcee5c2e98fb72f9a924cde8da8435b08244a80e
   FloatingPanel: 373478513a197cf140abd219ca9a9c049967332b
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
 
-PODFILE CHECKSUM: 20c0eb31c5a15f44e9aba29ab86a930b5a8d64ac
+PODFILE CHECKSUM: 63a9b3013bb280e094a986e235d570455888309d
 
 COCOAPODS: 1.8.4

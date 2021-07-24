@@ -29,8 +29,12 @@
 		C67005162690F30A00878694 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005152690F30A00878694 /* Caching.swift */; };
 		C67005182690F74A00878694 /* SocialModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005172690F74A00878694 /* SocialModels.swift */; };
 		C670051A2690F95B00878694 /* InstagramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005192690F95B00878694 /* InstagramCollectionViewCell.swift */; };
+		C6722D4C26A871BB00C940F7 /* NoticeImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6722D4B26A871BB00C940F7 /* NoticeImageController.swift */; };
+		C6722D4E26A88FAF00C940F7 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6722D4D26A88FAF00C940F7 /* EventsModel.swift */; };
 		C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674B0A126A13A3000BB3D20 /* NoticeCell.swift */; };
 		C674B0A526A13CE500BB3D20 /* ArticleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */; };
+		C68D47AA26A892CD00D4545C /* TwitterBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C68D47A926A892CD00D4545C /* TwitterBridge.m */; };
+		C68D47AF26AC119A00D4545C /* SlcmInternalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */; };
 		C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */; };
 		C6C8C559268CD033008A6799 /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */; };
 		C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */; };
@@ -67,8 +71,13 @@
 		C67005152690F30A00878694 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		C67005172690F74A00878694 /* SocialModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialModels.swift; sourceTree = "<group>"; };
 		C67005192690F95B00878694 /* InstagramCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramCollectionViewCell.swift; sourceTree = "<group>"; };
+		C6722D4B26A871BB00C940F7 /* NoticeImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeImageController.swift; sourceTree = "<group>"; };
+		C6722D4D26A88FAF00C940F7 /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 		C674B0A126A13A3000BB3D20 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleWebView.swift; sourceTree = "<group>"; };
+		C68D47A826A892CD00D4545C /* MitPostiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MitPostiOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		C68D47A926A892CD00D4545C /* TwitterBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwitterBridge.m; sourceTree = "<group>"; };
+		C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlcmInternalController.swift; sourceTree = "<group>"; };
 		C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCell.swift; sourceTree = "<group>"; };
 		C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
 		C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramHorizontalController.swift; sourceTree = "<group>"; };
@@ -171,9 +180,10 @@
 		C67EA1742696E5D00020CDD1 /* Notice */ = {
 			isa = PBXGroup;
 			children = (
+				C674B0A126A13A3000BB3D20 /* NoticeCell.swift */,
 				C67EA1762696E5EB0020CDD1 /* Model */,
 				C67EA1752696E5DA0020CDD1 /* Controller */,
-				C674B0A126A13A3000BB3D20 /* NoticeCell.swift */,
+				C6722D4B26A871BB00C940F7 /* NoticeImageController.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -198,8 +208,18 @@
 			isa = PBXGroup;
 			children = (
 				C60AE558268902690003C6F4 /* EventsTableViewController.swift */,
+				C6722D4D26A88FAF00C940F7 /* EventsModel.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		C68D47AB26ABFBB300D4545C /* SLCM */ = {
+			isa = PBXGroup;
+			children = (
+				C60AE556268902230003C6F4 /* SLCMViewController.swift */,
+				C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */,
+			);
+			path = SLCM;
 			sourceTree = "<group>";
 		};
 		C6C8C55C268CDEDF008A6799 /* Social */ = {
@@ -208,6 +228,8 @@
 				C6C8C55E268CDF0A008A6799 /* View */,
 				C6C8C55D268CDEEA008A6799 /* Controller */,
 				C674B0A326A13BD500BB3D20 /* Model */,
+				C68D47A926A892CD00D4545C /* TwitterBridge.m */,
+				C68D47A826A892CD00D4545C /* MitPostiOS-Bridging-Header.h */,
 			);
 			path = Social;
 			sourceTree = "<group>";
@@ -270,7 +292,7 @@
 				C60AE54F2688FDEC0003C6F4 /* Master */,
 				C64B0844268A61E800696FEA /* Articles */,
 				C6C8C55C268CDEDF008A6799 /* Social */,
-				C60AE556268902230003C6F4 /* SLCMViewController.swift */,
+				C68D47AB26ABFBB300D4545C /* SLCM */,
 				C67EA1772696E6E20020CDD1 /* Events */,
 				C67EA1742696E5D00020CDD1 /* Notice */,
 				C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */,
@@ -322,6 +344,7 @@
 				TargetAttributes = {
 					C6FDDFFF2688F8BF00CBC270 = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -415,10 +438,12 @@
 				C666AA332690B17800C37684 /* SearchTagsController.swift in Sources */,
 				C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */,
 				C60AE555268901FD0003C6F4 /* SocialTableViewController.swift in Sources */,
+				C6722D4C26A871BB00C940F7 /* NoticeImageController.swift in Sources */,
 				C60CBE52269DC3160053D0F9 /* MagazineModel.swift in Sources */,
 				C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */,
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
+				C6722D4E26A88FAF00C940F7 /* EventsModel.swift in Sources */,
 				C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */,
 				C667929A26A721C000438A59 /* InstaFullScreenController.swift in Sources */,
 				C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */,
@@ -430,8 +455,10 @@
 				C60CBE58269DE2290053D0F9 /* MagazinePDFController.swift in Sources */,
 				C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */,
 				C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */,
+				C68D47AA26A892CD00D4545C /* TwitterBridge.m in Sources */,
 				C67005182690F74A00878694 /* SocialModels.swift in Sources */,
 				C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */,
+				C68D47AF26AC119A00D4545C /* SlcmInternalController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +598,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CPSMM6Y56;
 				INFOPLIST_FILE = MitPostiOS/Info.plist;
@@ -581,6 +609,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = R.MitPostiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MitPostiOS/Social/MitPostiOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -592,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CPSMM6Y56;
 				INFOPLIST_FILE = MitPostiOS/Info.plist;
@@ -602,6 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = R.MitPostiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MitPostiOS/Social/MitPostiOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        getArticles()
+//        getN
         return true
     }
 
@@ -75,6 +78,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    
+//    MARK:- Getting API stuff
+    
+    func getArticles(){
+        var articles = [ArticleModel]()
+        Networking.sharedInstance.getArticleData(method: HTTPMethods.get.description, dataCompletion: { articleData in
+            articles = articleData
+            Caching.sharedInstance.saveArticlesToCache(article: articles)
+        }, errorCompletion: { err in
+            print("Error in fetching article/post data", err)
+        })
+        
+        
     }
 
 }

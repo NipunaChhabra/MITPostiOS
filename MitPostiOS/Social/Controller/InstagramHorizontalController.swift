@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Disk
 
 private let instaReuseIdentifier = "InstagramCell"
 
@@ -25,11 +26,31 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
     }
     
     var instaDelegate: InstaFullScreenDelegate?
+    
+    
+//    MARK:- LifeCycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        getInstaData()
+        getCachedInstaData()
+    }
+    
+    
+    
+    
+    
+    
+//    MARK:-Helper functions and API
+    private func getCachedInstaData(){
+        do{
+            let retrievedInstaData = try Disk.retrieve(instagramCache, from: .caches, as: [Instagram].self)
+            self.instagramData = retrievedInstaData
+        }
+        catch let error{
+            print("Insta cache error in InstaHorizontalController: ", error)
+            getInstaData()
+        }
     }
     
     func getInstaData(){
@@ -41,6 +62,10 @@ class InstagramHorizontalController: UICollectionViewController , UICollectionVi
         }
 
     }
+    
+    
+    
+//    MARK:- Setting up UI
     
     
     func configureCollectionView() {

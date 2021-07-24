@@ -9,6 +9,7 @@ target 'MitPostiOS' do
 	pod 'Disk'
 	pod 'SDWebImage'
 	pod 'FloatingPanel'
+	pod 'STTwitter'
 	
 
 end

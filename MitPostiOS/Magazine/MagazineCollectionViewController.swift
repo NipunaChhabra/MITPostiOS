@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import PDFKit
+import Disk
 
 
 
@@ -34,7 +35,7 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
         super.viewDidLoad()
         setupNavigationBar()
         configureCollectionView()
-        fetchMagazines()
+        getCachedMagazines()
     }
     
     
@@ -77,6 +78,18 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
        })
        alertController.addAction(okayAction)
        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func getCachedMagazines(){
+        do{
+            let retrievedMagazines = try Disk.retrieve(magazineCache, from: .caches, as: [MagazineData].self)
+            self.magazines = retrievedMagazines
+          
+        }
+        catch let error{
+            print("Magazine cache error in MagazineController: ", error)
+            fetchMagazines()
+        }
     }
     
     

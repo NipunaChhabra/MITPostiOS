@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SafariServices
+import Disk
 
-class EventsTableViewController: UITableViewController {
+class EventsTableViewController: UITableViewController, SFSafariViewControllerDelegate {
     
 //    MARK:- Properties
     private let articleCellID = "ArticleCell"
@@ -25,9 +27,10 @@ class EventsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "defaultBG")
+        tableView.backgroundColor = UIColor(named: "defaultBG")
         setupNavigationBar()
         configureTableView()
-        getArticles()
+        getCachedArticles()
     }
     
     
@@ -60,6 +63,23 @@ class EventsTableViewController: UITableViewController {
         print("Do something")
         let vc = InfoTableViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getCachedArticles(){
+        do{
+            let retrievedArticles = try Disk.retrieve(articlesCache, from: .caches, as: [ArticleModel].self)
+            var filteredArticles = [ArticleModel]()
+                for i in retrievedArticles{
+                    if( i.category == "Event Reports"){
+                        filteredArticles.append(i)
+                    }
+                }
+                self.articles = filteredArticles
+        }
+        catch let error{
+            print("Articles cache error in EventController: ", error)
+            getArticles()
+        }
     }
     
     func getArticles(){
@@ -142,6 +162,7 @@ class EventsTableViewController: UITableViewController {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: articleCellID, for: indexPath) as! ArticleCell
             cell.selectionStyle = .none
+            cell.backgroundColor = .clear
             cell.articleData = articles?[indexPath.row]
             return cell
          
@@ -161,12 +182,21 @@ class EventsTableViewController: UITableViewController {
     }
     
     private func openWebView(urlString : String){
-        let vc = ArticleWebViewController()
-        vc.webURL = urlString
-        vc.fromEventReports = true
-        vc.hidesBottomBarWhenPushed = true
-        let nav = MasterNavigationBarController(rootViewController: vc)
-        self.present(nav, animated: true, completion: nil)
+        
+        if let url = URL(string: urlString) {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+                
+               let vc = SFSafariViewController(url: url, configuration: config)
+               vc.delegate = self
+               present(vc, animated: true)
+        }
+//        let vc = ArticleWebViewController()
+//        vc.webURL = urlString
+//        vc.fromEventReports = true
+//        vc.hidesBottomBarWhenPushed = true
+//        let nav = MasterNavigationBarController(rootViewController: vc)
+//        self.present(nav, animated: true, completion: nil)
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
     

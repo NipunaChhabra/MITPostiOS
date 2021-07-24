@@ -7,6 +7,13 @@
 
 import UIKit
 
+struct Tweet{
+    let tweet: String?
+    let tweetLink:String?
+    let time:String?
+    let date:String?
+}
+
 class SocialHeaderView : UIView{
     
     lazy var facebookButton: UIButton = {
@@ -102,17 +109,26 @@ class SocialTableViewController: UITableViewController{
     private let twitterCellId = "TwitterCell"
     private let instagramCellId = "InstagramCell"
     
+    var tweets : [Tweet]?{
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+          
+        }
+    }
+    
     var instaVC : InstaFullScreenController!
     
     lazy var followInstaButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.systemOrange, for: .normal)
 //        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
-        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        button.layer.cornerRadius = 13
+        button.widthAnchor.constraint(equalToConstant: 64).isActive = true
+//        button.layer.cornerRadius = 13
         button.isUserInteractionEnabled = true
-        button.setTitle("FOLLOW", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.setTitle("Follow", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleInstaFollow), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -122,11 +138,11 @@ class SocialTableViewController: UITableViewController{
         let button = UIButton()
         button.setTitleColor(.systemOrange, for: .normal)
 //        button.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.2)
-        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        button.layer.cornerRadius = 13
+        button.widthAnchor.constraint(equalToConstant: 64).isActive = true
+//        button.layer.cornerRadius = 13
         button.isUserInteractionEnabled = true
-        button.setTitle("FOLLOW", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.setTitle("Follow", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.addTarget(self, action: #selector(handleTwitterFollow), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -142,7 +158,7 @@ class SocialTableViewController: UITableViewController{
         headerLabel.text = "Instagram Posts"
 
         headerView.addSubview(followInstaButton)
-       _ = followInstaButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 28)
+       _ = followInstaButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 8, heightConstant: 28)
         
         
         headerView.addSubview(headerLabel)
@@ -161,7 +177,7 @@ class SocialTableViewController: UITableViewController{
         headerView.isUserInteractionEnabled = true
         
         headerView.addSubview(followTwitterButton)
-       _ = followTwitterButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, heightConstant: 28)
+       _ = followTwitterButton.anchor(top: headerView.topAnchor, left: nil, bottom: nil, right: headerView.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 8, heightConstant: 28)
         
         headerView.addSubview(headerLabel)
         _ = headerLabel.anchor(top: headerView.topAnchor, left: headerView.leftAnchor, bottom: nil, right:nil, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 0, heightConstant: 30)
@@ -180,6 +196,58 @@ class SocialTableViewController: UITableViewController{
         view.backgroundColor = UIColor(named: "defaultBG")
         setupNavigationBar()
         setupTableView()
+        let twitter = STTwitterAPI(oAuthConsumerKey: "1sNKbIJ9Tk4pR4lK5oiyLmTNq", consumerSecret: "gu7pGeoxtvq2gzXcrexfd6iZTJG8R0l2zfngTyZsrJQ4DHi0YM", oauthToken: "1308363567389765633-o0JBg7NFzMFIJB3ZEOulmf3LvJr96K", oauthTokenSecret: "BZAOcysWkPtNLmBrLk03aCufasuZF9YlyRwsj68tILoiT")
+        
+        twitter?.verifyCredentials(userSuccessBlock: { username, userId in
+            
+            twitter?.getStatusesUserTimeline(forUserID: "", screenName: "themitpost", sinceID: nil, count: "20", maxID: nil, trimUser: nil, excludeReplies: 0, contributorDetails: 0, includeRetweets: 0, useExtendedTweetMode: 0, successBlock: { statuses in
+                self.tweets = [Tweet]()
+                    for status in statuses! {
+                        var tweetText = ""
+                        var tweetURL = ""
+                        var date = ""
+                        var time = ""
+//                        print(status)
+                        if let tweet = (status as AnyObject)["text"]! as? String
+                        {
+                         tweetText = tweet
+                        }
+                        
+                        if let url = (status as AnyObject)["expanded_url"]! as? String
+                        {
+                         print(url)
+                        }
+                        self.tweets?.append(Tweet(tweet: tweetText, tweetLink: "", time: "", date: ""))
+                    }
+                
+               
+            }, errorBlock: { error in
+                print(error)
+            })
+        
+            
+            
+//            twitter?.getHomeTimeline(sinceID: nil, count: 5, successBlock: { statuses in
+//
+//                self.tweets = [Tweet]()
+//                for status in statuses! {
+//                    print(status)
+//                    if let tweetText = (status as AnyObject)["text"]! as? String
+//                    {
+//                        self.tweets?.append(Tweet(tweet: tweetText))
+//                    }
+//                }
+////                    let textData = status["text"]
+//
+//
+//            }, errorBlock: { error in
+//                print("Error in getting tweets")
+//            })
+        }, errorBlock: { error in
+            print(error)
+        })
+        
+        
     }
     
     
@@ -238,7 +306,7 @@ class SocialTableViewController: UITableViewController{
         case 0: //Instagram section
             return 1
         case 1:  //Twitter section
-            return 6
+            return tweets?.count ?? 0
         default:
             return 0
         }
@@ -266,6 +334,8 @@ class SocialTableViewController: UITableViewController{
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: twitterCellId, for: indexPath) as! TwitterTableViewCell
             cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            cell.tweetlabel.text = tweets?[indexPath.row].tweet
             return cell
         default:
             return UITableViewCell()
@@ -350,12 +420,11 @@ extension SocialTableViewController :  InstaViewDelegate {
             gesture.view?.frame = self.startingFrame ?? .zero
             self.tabBarController?.tabBar.frame.origin.y -= 100
             self.tableView.isScrollEnabled = true
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
 
 //            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height - 100
-            if let tabBarFrame = self.tabBarController?.tabBar.frame {
+//            if let tabBarFrame = self.tabBarController?.tabBar.frame {
 //                self.tabBarController?.tabBar.frame..origin.y = self.view.framw.height-80
-                
-               }
         } completion: { _ in
             gesture.view?.removeFromSuperview()
             self.instaVC.removeFromParent()

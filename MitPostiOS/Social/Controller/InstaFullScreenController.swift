@@ -10,11 +10,14 @@ import SDWebImage
 
 class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    private let instaCellIdentifier = "instaCaptionCell"
+    
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.dataSource = self
         tv.delegate = self
         tv.showsVerticalScrollIndicator = false
+        tv.separatorStyle = .none
         return tv
     }()
     
@@ -25,11 +28,13 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
     }
     
     var instaHeader: InstaHeader?
-    var instaHeaderHeight: CGFloat = 280.0
+    var instaHeaderHeight: CGFloat = 200.0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height+100
+
     }
 
     override func viewDidLoad() {
@@ -38,15 +43,15 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
         view.addSubview(tableView)
         tableView.fillSuperview()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(InstaCaptionCell.self, forCellReuseIdentifier: instaCellIdentifier)
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 280)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         instaHeader = InstaHeader(frame: frame)
         tableView.addSubview(instaHeader!)
-        tableView.contentInset = UIEdgeInsets(top: instaHeaderHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: instaHeaderHeight, left: 0, bottom: 80, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -instaHeaderHeight - 8)
         tableView.tableFooterView = UIView()
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+//        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
         
         if let imageURL = instaPostData?.imageUrl{
                 instaHeader?.headerImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
@@ -55,7 +60,6 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(tableView.contentOffset.y)
         var headerRect = CGRect(x: 0, y: -instaHeaderHeight, width: tableView.bounds.width, height: instaHeaderHeight)
         if tableView.contentOffset.y < -instaHeaderHeight {
             headerRect.origin.y = tableView.contentOffset.y
@@ -75,9 +79,9 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
 //            titleLabel.alpha = 0
 //        }
         instaHeader?.headerImageView.alpha = 1 - offset
-//        homeHeader?.gradient.frame = headerRect
+        instaHeader?.gradient.frame = headerRect
         instaHeader?.frame = headerRect
-//        homeHeader?.gradient.frame.size.height = headerRect.size.height
+        instaHeader?.gradient.frame.size.height = headerRect.size.height
         instaHeader?.layoutIfNeeded()
     }
         
@@ -86,33 +90,32 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 10
+        return 1
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-//
-//         Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: instaCellIdentifier, for: indexPath) as! InstaCaptionCell
+        cell.instaPostData = self.instaPostData
+        cell.selectionStyle = .none
+        cell.contentView.isUserInteractionEnabled = false
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return .init(100)
+        return UITableView.automaticDimension
     }
-    
-
-  
-
-
 }
+
+
+
+
+
+
 
 
 class InstaHeader: UIView, UIGestureRecognizerDelegate{
@@ -143,7 +146,7 @@ class InstaHeader: UIView, UIGestureRecognizerDelegate{
         super.init(frame: frame)
         
         let titleLabel = UILabel()
-        titleLabel.text = "The MIT Post"
+        titleLabel.text = ""
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         titleLabel.textColor = .white
         titleLabel.sizeToFit()

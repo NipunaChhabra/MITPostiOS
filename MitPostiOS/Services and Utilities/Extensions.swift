@@ -122,6 +122,77 @@ extension UIView {
     
 }
 
+class LeftPaddedTextField: UITextField {
+    
+    let padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 5)
+    
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+}
+
+
+extension UITextField {
+    func configure(color: UIColor = .blue,
+                   font: UIFont = UIFont.boldSystemFont(ofSize: 12),
+                   cornerRadius: CGFloat,
+                   borderColor: UIColor? = nil,
+                   backgroundColor: UIColor,
+                   borderWidth: CGFloat? = nil) {
+        if let borderWidth = borderWidth {
+            self.layer.borderWidth = borderWidth
+        }
+        if let borderColor = borderColor {
+            self.layer.borderColor = borderColor.cgColor
+        }
+        self.layer.cornerRadius = cornerRadius
+        self.font = font
+        self.textColor = color
+        self.backgroundColor = backgroundColor
+    }
+    
+    
+    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil) {
+          
+           let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
+
+           let toolbar: UIToolbar = UIToolbar()
+           toolbar.barStyle = .default
+           toolbar.items = [
+               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+               UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
+           ]
+           toolbar.sizeToFit()
+
+           self.inputAccessoryView = toolbar
+       }
+
+       // Default actions:
+    @objc func doneButtonTapped() { self.resignFirstResponder() }
+}
+
+
+
+extension UserDefaults {
+    enum UserDefaultsKeys: String {
+        case isLoggedIn
+    }
+    @objc func setIsLoggedIn(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+        synchronize()
+    }
+    @objc func isLoggedIn() -> Bool {
+        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+    }
+}
+
+
 extension UIViewController {
     @objc class func displaySpinner(onView : UIView) -> UIView {
         let spinnerView = UIView.init(frame: onView.bounds)
@@ -163,6 +234,7 @@ extension UIColor {
 class LoadingButton: UIButton {
     @objc var originalButtonText: String?
     @objc var activityIndicator: UIActivityIndicatorView!
+    
     @objc func showLoading() {
         originalButtonText = self.titleLabel?.text
         self.setTitle("", for: UIControl.State())
@@ -307,5 +379,37 @@ class FileDownloader {
             })
             task.resume()
         }
+    }
+}
+
+
+class SpinnerPopUp: UIView {
+    
+    var constant : Int?
+    
+    lazy var spinnerView : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+        self.frame = UIScreen.main.bounds
+        addSubview(spinnerView)
+        spinnerView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -128).isActive = true
+        spinnerView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        spinnerView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+        spinnerView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+        spinnerView.startAnimating()
+    }
+    
+    @objc func hideSpinner(){
+        self.removeFromSuperview()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -51,8 +51,8 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            view.backgroundColor =  UIColor(named: "defaultBG")
-            collectionView.backgroundColor = UIColor(named: "defaultBG")
+            view.backgroundColor =  UIColor(named: "articleCellBG")
+            collectionView.backgroundColor = UIColor(named: "articleCellBG")
             collectionView.register(TagCell.self, forCellWithReuseIdentifier: cellId)
             if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
@@ -70,8 +70,7 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
     
         override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
-            indexValue = indexPath.item
-            collectionView.reloadData()
+            self.indexValue = indexPath.item
             delegate?.didTapTag(indexPath: indexPath)
         }
         
@@ -80,8 +79,6 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
             cell.label.text = tags[indexPath.item]
             if indexValue == indexPath.item{
             cell.isSelected = true
-            }else{
-            cell.isSelected = false
             }
             return cell
         }
@@ -120,7 +117,7 @@ class TagCell: UICollectionViewCell {
     }
     let backgroundCardView: UIView = {
         let view = UIView()
-        view.backgroundColor = .orange// UIColor(red: 118.0/255.0, green: 118.0/255.0, blue: 128.0/255.0, alpha: 0.12)
+        view.backgroundColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.12)// UIColor(red: 118.0/255.0, green: 118.0/255.0, blue: 128.0/255.0, alpha: 0.12)
         view.layer.cornerRadius = 20
         view.layer.borderWidth = 0.15
         return view
@@ -130,7 +127,7 @@ class TagCell: UICollectionViewCell {
         let l = UILabel()
         l.text = "Tag"
         l.textAlignment = .center
-//        l.textColor = .lightGray
+        l.textColor = .lightGray
         l.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return l
     }()
@@ -138,11 +135,11 @@ class TagCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             label.textColor = isSelected ? .white : .lightGray
-//            if UIViewController().isSmalliPhone(){
-//                label.font = isSelected ? UIFont.systemFont(ofSize: 12, weight: .medium) : UIFont.systemFont(ofSize: 12, weight: .regular)
-//            }else{
+            if UIViewController().isSmalliPhone(){
+                label.font = isSelected ? UIFont.systemFont(ofSize: 12, weight: .medium) : UIFont.systemFont(ofSize: 12, weight: .regular)
+            }else{
                 label.font = isSelected ? UIFont.systemFont(ofSize: 14, weight: .medium) : UIFont.systemFont(ofSize: 14, weight: .regular)
-//            }
+            }
             backgroundCardView.backgroundColor = isSelected ? UIColor.systemOrange: UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.12)
         }
     }
