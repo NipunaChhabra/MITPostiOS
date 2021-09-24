@@ -113,6 +113,16 @@ extension UIView {
         }
     }
     
+    func centerY(inView view: UIView, rightAnchor: NSLayoutXAxisAnchor? = nil, paddingRight: CGFloat? = 0) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        if let rightAnchor = rightAnchor, let padding = paddingRight {
+            self.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding).isActive = true
+        }
+    }
+    
     
     func addConstraintsToFillView(_ view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
@@ -272,6 +282,44 @@ class LoadingButton: UIButton {
     }
 }
 
+class LoadingImageView: UIImageView{
+    @objc var activityIndicator: UIActivityIndicatorView!
+    
+    @objc func showLoading() {
+        if (activityIndicator == nil) {
+            activityIndicator = createActivityIndicator()
+        }
+        showSpinning()
+    }
+    
+    @objc func hideLoading() {
+        activityIndicator.stopAnimating()
+    }
+    
+    private func createActivityIndicator() -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .systemOrange
+        return activityIndicator
+    }
+    
+    private func showSpinning() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(activityIndicator)
+        centerActivityIndicatorInButton()
+        activityIndicator.startAnimating()
+    }
+    
+    private func centerActivityIndicatorInButton() {
+        let xCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: activityIndicator, attribute: .centerX, multiplier: 1, constant: 0)
+        self.addConstraint(xCenterConstraint)
+        
+        let yCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: activityIndicator, attribute: .centerY, multiplier: 1, constant: 0)
+        self.addConstraint(yCenterConstraint)
+    }
+    
+}
+
 class PaddingLabel: UILabel {
     
     @IBInspectable var topInset: CGFloat = 5.0
@@ -395,13 +443,17 @@ class SpinnerPopUp: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+//        self.backgroundColor = .clear
         self.frame = UIScreen.main.bounds
         addSubview(spinnerView)
-        spinnerView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -128).isActive = true
+        spinnerView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -180).isActive = true
         spinnerView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        spinnerView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
-        spinnerView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+//        spinnerView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+//        spinnerView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+//        spinnerView.center(inView: self)
+        spinnerView.setDimensions(width: 64, height: 64)
+        spinnerView.color = .black
+        spinnerView.backgroundColor = .systemOrange
         spinnerView.startAnimating()
     }
     
@@ -412,4 +464,103 @@ class SpinnerPopUp: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+extension UIView{
+    func setGradientBackgroundColor(colorOne: UIColor, colorTwo: UIColor) {
+           let gradientLayer = CAGradientLayer()
+           gradientLayer.frame = bounds
+           gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]
+           gradientLayer.locations = [0.0, 1.0]
+           gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+           gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+           
+           layer.insertSublayer(gradientLayer, at: 0)
+       }
+
+}
+
+extension NSMutableAttributedString {
+    var fontSize:CGFloat { return 11 }
+    var boldFont:UIFont { return UIFont(name: "AvenirNext-Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) }
+    var normalFont:UIFont { return UIFont(name: "AvenirNext-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)}
+    
+    func bold(_ value:String) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font : boldFont
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
+    func normal(_ value:String) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font : normalFont,
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    /* Other styling methods */
+    func orangeHighlight(_ value:String) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font :  normalFont,
+            .foregroundColor : UIColor.white,
+            .backgroundColor : UIColor.orange
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
+    func blackHighlight(_ value:String) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font :  normalFont,
+            .foregroundColor : UIColor.white,
+            .backgroundColor : UIColor.black
+            
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+    
+    func underlined(_ value:String) -> NSMutableAttributedString {
+        
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font :  normalFont,
+            .underlineStyle : NSUnderlineStyle.single.rawValue
+            
+        ]
+        
+        self.append(NSAttributedString(string: value, attributes:attributes))
+        return self
+    }
+}
+
+extension Dictionary {
+    func percentEncoded() -> Data? {
+        return map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
+        }
+        .joined(separator: "&")
+        .data(using: .utf8)
+    }
+}
+
+extension CharacterSet {
+    static let urlQueryValueAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+        return allowed
+    }()
 }

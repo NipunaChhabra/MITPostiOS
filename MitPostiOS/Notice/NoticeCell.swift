@@ -14,6 +14,7 @@ class NoticeCell : UITableViewCell{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = UIColor(named: "articleCellBG")
         
         if UIViewController().isSmalliPhone(){
             textLabel?.font = UIFont.boldSystemFont(ofSize: 18)

@@ -6,19 +6,41 @@
 //
 
 import UIKit
+import Disk
 
 class SlcmInternalController: UITableViewController {
     
 //    MARK:-Properties
-    
+    private let slcmCellID = "SLCMCell"
+    private let slcmHeaderCell = "SLCMHeader"
     
     var slcmController : SLCMViewController?
     
+    var slcmData:SlcmData?{
+        didSet{
+            guard let dAttendance = self.slcmData?.attendance else{return }
+           
+            self.slcmData?.attendance = self.unique(source: dAttendance)
+            self.slcmData?.attendance?.removeFirst()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
-    
-    
-    
-    
+    //Function to remove the duplicate values
+    func unique<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
+        var buffer = [T]()
+        var added = Set<T>()
+        for elem in source {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
+    }
+
     
     
     
@@ -34,16 +56,28 @@ class SlcmInternalController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        do{
+            let retrievedData = try Disk.retrieve(slcmCache, from: .caches, as: SlcmData.self)
+            self.slcmData = retrievedData
+        }
+        catch let error{
+            print("Slcm cache error in SlcmInternalController: ", error)
+//            getArticles()
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "defaultBG")
         setupNavigationBar()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
-        tableView.tableFooterView = UIView()
+        setupTableView()
+        
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
 
     
@@ -51,13 +85,23 @@ class SlcmInternalController: UITableViewController {
 //    MARK: -Setting up UI
     
     fileprivate func setupNavigationBar(){
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Rohit Kuber"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "lock.open")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(logoutPressed))
 
     }
     
-    
+    fileprivate func setupTableView(){
+//        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 120)
+//        let headerView = SLCMHeaderView(frame: frame)
+//        headerView.namelabel.text = slcmData?.name
+//        headerView.registrationNumberLabel.text = slcmData?.registration
+//        headerView.academicYearLabel.text = slcmData?.attendance?[1].year
+        tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        tableView.register(SLCMCell.self, forCellReuseIdentifier: slcmCellID)
+        tableView.register(SLCMHeaderCell.self, forCellReuseIdentifier: slcmHeaderCell)
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
+        
+    }
     
     
     
@@ -76,68 +120,57 @@ class SlcmInternalController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        if section == 0{
+            return 1
+        }else{
+        return slcmData?.attendance?.count ?? 0
+        }
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        
+        if (indexPath.section == 0){
+            let cell = tableView.dequeueReusableCell(withIdentifier: slcmHeaderCell, for: indexPath) as! SLCMHeaderCell
+            if let data = slcmData{
+                cell.namelabel.text = data.name
+                cell.registrationNumberLabel.text = data.registration
+                cell.yearLabel.text = slcmData?.attendance?[1].year
+                cell.semesterNumLabel.text = slcmData?.attendance?[1].semester
+            }
+            return cell
+        }else{
+        let cell = tableView.dequeueReusableCell(withIdentifier: slcmCellID, for: indexPath) as! SLCMCell
+        cell.selectionStyle = .none
+        if let atData = slcmData?.attendance{
+            cell.attendance = atData[indexPath.row]
+        }
+            return cell
     }
+}
 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+           return UIView()
+       }
+    
 
 }

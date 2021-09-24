@@ -6,15 +6,21 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SLCMViewController: UIViewController, UITextFieldDelegate {
     
 //    MARK:- Properties
     
+    var captcha: CaptchaModel?
+    
+    
+   private var slcmData:[SlcmData]?
+    
     lazy var mitPostLogoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo_dark")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "postLogo")
+        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .gray
         imageView.setDimensions(width: 150, height: 150)
         return imageView
@@ -55,14 +61,18 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
 
-    lazy var captchaImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+    lazy var captchaImageView: LoadingImageView = {
+        let iv = LoadingImageView()
+        iv.contentMode = .scaleToFill
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
         iv.setDimensions(width: view.frame.width/3+16, height: 84)
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .gray
+//        iv.backgroundColor = .gray
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         
         return iv
@@ -74,16 +84,16 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
         iv.layer.masksToBounds = true
         iv.clipsToBounds = true
         iv.image = UIImage(systemName: "arrow.clockwise")?.withTintColor(.orange, renderingMode: .alwaysOriginal)
-        iv.setDimensions(width: 36, height: 36)
+        iv.setDimensions(width: 30, height: 30)
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.isUserInteractionEnabled = true
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refreshCaptcha)))
         return iv
         }()
     
-    let slcmInternalVC = SlcmInternalController()
+    let slcmInternalVC = SlcmInternalController(style: .grouped)
 
-    var slcmNav : MasterNavigationBarController?
+    var slcmNav : UINavigationController?
    
 
     
@@ -93,9 +103,15 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         slcmInternalVC.slcmController = self
+//        navigationController?.navigationBar.prefersLargeTitles = true
         self.slcmNav = MasterNavigationBarController(rootViewController: slcmInternalVC)
         if(UserDefaults.standard.isLoggedIn()){
             setupViewLoggedIn()
+        }else{
+            setupNavigationBar()
+            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+            observeKeyboardNotifications()
+            setupViews()
         }
     }
     
@@ -107,6 +123,7 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
         observeKeyboardNotifications()
         setupViews()
+        getCaptcha()
         // Do any additional setup after loading the view.
     }
     
@@ -168,9 +185,9 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func infoPressed(){
-        let vc = InfoTableViewController()
+     let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
-        print("Do something")
     }
     
     @objc func doneButtonTapped(){
@@ -178,15 +195,38 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func refreshCaptcha(){
-        print("Refresh Captcha")
+        self.captchaImageView.image = nil
+        self.captchaImageView.showLoading()
+        Networking.sharedInstance.getCaptchaData(method: HTTPMethods.get.description) { captchaData in
+            self.captchaImageView.hideLoading()
+            self.captcha = captchaData
+            self.captchaImageView.sd_setImage(with: captchaData.imageUrl!, completed: nil)
+            self.captchaImageView.backgroundColor = .clear
+        } errorCompletion: { error in
+            self.captchaImageView.hideLoading()
+            print("Error in fetching captcha", error)
+        }
         
+    }
+    
+    func getCaptcha(){
+        captchaImageView.showLoading()
+        Networking.sharedInstance.getCaptchaData(method: HTTPMethods.get.description) { captchaData in
+            self.captchaImageView.hideLoading()
+            self.captcha = captchaData
+            self.captchaImageView.sd_setImage(with: captchaData.imageUrl!, completed: nil)
+        } errorCompletion: { error in
+            self.captchaImageView.hideLoading()
+            print("Error in fetching captcha", error)
+        }
+
     }
     
     
 //    MARK:- Setting up UI
     fileprivate func setupNavigationBar(){
 //        navigationController.pre
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "SLCM"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
 
@@ -194,11 +234,11 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
     
     func setupViews(){
         
-        registrationNumberField.configure(color: .white,
+        registrationNumberField.configure(color: UIColor(named: "noticeTitleColor")!,
                              font: isSmalliPhone() ? UIFont.systemFont(ofSize: 15) : UIFont.systemFont(ofSize: 18),
                                        cornerRadius: isSmalliPhone() ? 2 : 5,
                                        borderColor:  .systemOrange,
-                                       backgroundColor: .clear,
+                                       backgroundColor:  UIColor(named: "articleCellBG")!,
                                        borderWidth: 1.0)
         registrationNumberField.keyboardType = .numberPad
         registrationNumberField.autocorrectionType = .no
@@ -214,11 +254,11 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
             ])
         
         
-        passwordField.configure(color: .white,
+        passwordField.configure(color: UIColor(named: "noticeTitleColor")!,
                                 font: isSmalliPhone() ? UIFont.systemFont(ofSize: 15) : UIFont.systemFont(ofSize: 18),
                                 cornerRadius: isSmalliPhone() ? 2 : 5,
                                 borderColor: .systemOrange,
-                                backgroundColor:   .clear,
+                                backgroundColor: UIColor(named: "articleCellBG")!,
                                 borderWidth: 1.0)
         passwordField.isSecureTextEntry = true
         passwordField.clipsToBounds = true
@@ -231,11 +271,11 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        captchaField.configure(color: .white,
+        captchaField.configure(color: UIColor(named: "noticeTitleColor")!,
                                 font: isSmalliPhone() ? UIFont.systemFont(ofSize: 15) : UIFont.systemFont(ofSize: 18),
                                 cornerRadius: isSmalliPhone() ? 2 : 5,
                                 borderColor: .systemOrange,
-                                backgroundColor:   .clear,
+                                backgroundColor:  UIColor(named: "articleCellBG")!,
                                 borderWidth: 1.0)
         captchaField.isSecureTextEntry = false
         captchaField.clipsToBounds = true
@@ -246,6 +286,11 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
             .font: isSmalliPhone() ? UIFont.systemFont(ofSize: 15) : UIFont.systemFont(ofSize: 18)
             ])
 
+        if captcha != nil{
+            if let url = captcha?.imageUrl{
+            captchaImageView.sd_setImage(with: url, completed: nil)
+            }
+        }
         
         if isSmalliPhone(){
             view.addSubview(mitPostLogoImageView)
@@ -307,12 +352,38 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
 //    MARK:- API call
     
     @objc func handleLogin(){
-        UserDefaults.standard.setIsLoggedIn(value: true)
-        if let nav = slcmNav{
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        view.addSubview(nav.view!)
-        nav.view.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        
+        self.hideKeyboard()
+        
+        guard let id = captcha?.id else { return}
+        
+        guard let token = captchaField.text else {return}
+        
+        guard let registration = registrationNumberField.text else{return}
+        
+        guard let password = passwordField.text else{ return}
+        
+        
+        loginButton.showLoading()
+        loginButton.activityIndicator.tintColor = .white
+        
+        
+        Networking.sharedInstance.getSLCMData(method: HTTPMethods.post.description, id: id , token: token, registration: String(registration), password: password) { slcmData in
+           
+            if let nav = self.slcmNav{
+            Caching.sharedInstance.saveSlcmDataToCache(slcmData: slcmData ?? nil)
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            self.view.addSubview(nav.view!)
+            nav.view.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor)
+            UserDefaults.standard.setIsLoggedIn(value: true)
+                self.loginButton.hideLoading()
+            }
+        } errorCompletion: { err in
+            print("Error in fetching data",err)
+            self.loginButton.hideLoading()
         }
+
+       
     }
     
     
@@ -328,6 +399,9 @@ class SLCMViewController: UIViewController, UITextFieldDelegate {
                 nav.view!.removeFromSuperview()
             }
             self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.setupViews()
+            self.captchaImageView.image = nil
+            self.captchaField.text = ""
         }
         actionSheet.addAction(sureAction)
         actionSheet.addAction(cancel)

@@ -46,7 +46,7 @@ class ArticleCell : UITableViewCell{
     
     lazy var postTitleLabel : UILabel = {
         let label = UILabel()
-        label.text = "Checking post Title wsdfsdfsdfsdfsjfbsjfhfbdjhbfhjdsbfhjdsbfjdbfd\n sdfsdfsdfsfsdfbbsdfs"
+        label.text = "Post Title"
 //        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 21)
         
@@ -56,6 +56,7 @@ class ArticleCell : UITableViewCell{
             label.font = UIFont.boldSystemFont(ofSize: 21)
         }
         label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -77,10 +78,6 @@ class ArticleCell : UITableViewCell{
     
     lazy var dateLabel: UILabel = {
         let label  = UILabel()
-//        if UIViewController().isSmalliPhone(){
-//            label.font = UIFont.systemFont(ofSize: 16)
-//        }else{
-//            label.font = UIFont.systemFont(ofSize: 20)
         if UIViewController().isSmalliPhone(){
             label.font = UIFont.italicSystemFont(ofSize: 13)
         }else{
@@ -132,7 +129,7 @@ class ArticleCell : UITableViewCell{
         addSubview(descriptionLabel)
         _ = descriptionLabel.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 10, rightConstant: 20)
         
-        _ = backgroundCard.anchor(top: postImageView.topAnchor, left: leftAnchor, bottom: descriptionLabel.bottomAnchor, right: rightAnchor, topConstant: -0.5, leftConstant: 10, bottomConstant: -8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        _ = backgroundCard.anchor(top: postImageView.topAnchor, left: leftAnchor, bottom: descriptionLabel.bottomAnchor, right: rightAnchor, topConstant: -0, leftConstant: 10, bottomConstant: -8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
     }
     

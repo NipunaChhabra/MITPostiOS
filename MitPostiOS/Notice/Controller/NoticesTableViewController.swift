@@ -38,7 +38,6 @@ class NoticesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "defaultBG")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
         setupNavigationBar()
         configureTableView()
         getCachedNotices()
@@ -54,18 +53,20 @@ class NoticesTableViewController: UITableViewController {
     
 //    MARK: -Helper functions and API
     @objc func infoPressed(){
-        let vc = InfoTableViewController()
+        let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
-        print("Do something")
     }
     
     fileprivate func setupNavigationBar(){
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
         navigationItem.title = "Notices"
     }
     
     fileprivate func configureTableView(){
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+//        tableView.backgroundColor = UIColor(named: "articleCellBG")
         tableView.register(NoticeCell.self, forCellReuseIdentifier: noticeCellID)
         tableView.tableFooterView = UIView()
         
@@ -144,47 +145,53 @@ class NoticesTableViewController: UITableViewController {
         
         guard let noticeData = notices?[indexPath.row] else {return }
         
-        if let pdflink = noticeData.pdfLink{
-            if(pdflink != "" && (pdflink.contains("pdf"))){
-                let pdfURL = URL(string: pdflink)
-                self.selectedIndexpath = indexPath
-                self.tableView.isUserInteractionEnabled = false
-                openPdf(pdfURL: pdfURL! , pdfTitle: noticeData.title ?? "")
-            }else if(pdflink != ""){
-                if let url = URL(string: pdflink) {
+        let pdfLink = noticeData.pdfLink ?? " "
+        let imageLink = noticeData.imageLink ?? " "
+        
+            if(pdfLink != "" && imageLink == ""){
+            if let url = URL(string: pdfLink) {
+                   let config = SFSafariViewController.Configuration()
+                   config.entersReaderIfAvailable = true
+
+                   let vc = SFSafariViewController(url: url, configuration: config)
+                   present(vc, animated: true)
+               }
+            }
+           else if(imageLink != "" && pdfLink == ""){
+                if let url = URL(string: imageLink) {
                        let config = SFSafariViewController.Configuration()
                        config.entersReaderIfAvailable = true
 
                        let vc = SFSafariViewController(url: url, configuration: config)
                        present(vc, animated: true)
                    }
-            }
-        }
-        
-        if let imagelink = noticeData.imageLink{
-            if(imagelink != ""){
-                let vc = NoticeImageController()
-                vc.hidesBottomBarWhenPushed = true
-                vc.imageLink = imagelink
-                self.selectedIndexpath = indexPath
-                self.navigationController?.pushViewController(vc, animated: true)
                 
             }
+           else if(imageLink != "" && pdfLink != ""){
+            if let url = URL(string: imageLink) {
+                   let config = SFSafariViewController.Configuration()
+                   config.entersReaderIfAvailable = true
+
+                   let vc = SFSafariViewController(url: url, configuration: config)
+                   present(vc, animated: true)
+               }
         }
+        
+        
     }
     
-    func openPdf(pdfURL: URL, pdfTitle : String){
-        let vc = MagazinePDFController()
-        vc.pdfTitle = pdfTitle
-        vc.hidesBottomBarWhenPushed = true
-        FileDownloader.loadFileAsync(url: pdfURL) { pdfLocation, error in
-            vc.pdfLink = pdfLocation ?? ""
-            DispatchQueue.main.async {
-                self.tableView.isUserInteractionEnabled = true
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-        }
-    }
+//    func openPdf(pdfURL: URL, pdfTitle : String){
+//        let vc = MagazinePDFController()
+//        vc.pdfTitle = pdfTitle
+//        vc.hidesBottomBarWhenPushed = true
+//        FileDownloader.loadFileAsync(url: pdfURL) { pdfLocation, error in
+//            vc.pdfLink = pdfLocation ?? ""
+//            DispatchQueue.main.async {
+//                self.tableView.isUserInteractionEnabled = true
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
+//    }
   
  
 

@@ -21,8 +21,7 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
         
         var tags: [String] = ["All","Arts & Culture","Campus","Fests","Interviews","National & Global","Science & Technology","FAQ","Miscellaneous"]{
             didSet{
-                collectionView.reloadData()
-                collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+//                collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
             }
         }
         var specialColor: UIColor?
@@ -47,6 +46,11 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
             v.backgroundColor = .lightGray
             return v
         }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
         
         
         override func viewDidLoad() {
@@ -61,6 +65,7 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
                 
             }
             collectionView.showsHorizontalScrollIndicator = false
+         
             
         }
         
@@ -70,19 +75,34 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
     
         override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
-            self.indexValue = indexPath.item
+            collectionView.deselectAllItems(animated: false)
+            collectionView.reloadData()
+            let defaults = UserDefaults.standard
+            self.indexValue = defaults.object(forKey: "indexValue") as? Int ?? 0
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TagCell
+            if self.indexValue == indexPath.item{
+            cell.isSelected = true
+            }
+//
+            defaults.set(indexPath.item, forKey: "indexValue")
+            defaults.synchronize()
             delegate?.didTapTag(indexPath: indexPath)
+           
         }
         
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TagCell
             cell.label.text = tags[indexPath.item]
-            if indexValue == indexPath.item{
+            
+            let defaults = UserDefaults.standard
+            self.indexValue = defaults.object(forKey: "indexValue") as? Int ?? 0
+
+            if self.indexValue == indexPath.item{
             cell.isSelected = true
             }
             return cell
         }
-
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             
@@ -175,4 +195,12 @@ extension String {
     }
 }
 
+
+extension UICollectionView {
+
+    func deselectAllItems(animated: Bool) {
+        guard let selectedItems = indexPathsForSelectedItems else { return }
+        for indexPath in selectedItems { deselectItem(at: indexPath, animated: animated) }
+    }
+}
 

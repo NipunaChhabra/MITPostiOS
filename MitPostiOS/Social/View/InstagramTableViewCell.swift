@@ -59,7 +59,7 @@ class InstaCaptionCell : UITableViewCell{
     
     lazy var backgroundCard : UIView = {
         let bg = UIView()
-        bg.backgroundColor = UIColor(named: "articleCellBG")
+        bg.backgroundColor = .clear // UIColor(named: "articleCellBG")
 //        bg.layer.cornerRadius = 10
 //        bg.layer.borderWidth = 0.4
 //        bg.layer.borderColor = UIColor.gray.cgColor
@@ -127,7 +127,7 @@ class InstaCaptionCell : UITableViewCell{
         _ = followButton.anchor(top: postedOnLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 20, leftConstant: 20, bottomConstant: 20, rightConstant: 20, heightConstant: 40)
 //
         
-        _ = backgroundCard.anchor(top: instaCaptionLabel.topAnchor, left: leftAnchor, bottom: followButton.bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: -8, rightConstant: 10)
+        _ = backgroundCard.anchor(top: instaCaptionLabel.topAnchor, left: leftAnchor, bottom: followButton.bottomAnchor, right: rightAnchor, topConstant: -10, leftConstant: 10, bottomConstant: -8, rightConstant: 10)
         
         
     }

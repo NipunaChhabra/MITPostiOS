@@ -6,93 +6,118 @@
 //
 
 import UIKit
+import SafariServices
+
+
 
 struct Tweet{
     let tweet: String?
     let tweetLink:String?
-    let time:String?
-    let date:String?
+    let createdAt:String?
+}
+
+struct entities{
+    
 }
 
 class SocialHeaderView : UIView{
     
-    lazy var facebookButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "play.rectangle.fill")?.withTintColor(UIColor(named: "defaultBG") ?? .clear, renderingMode: .alwaysOriginal), for: .normal)
-        if UIViewController().isSmalliPhone(){
-            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        }else{
-            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        }
-//        button.backgroundColor = .white
-//        button.startAnimatingPressActions()
-        button.tag = 0
-//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
-        button.layer.cornerRadius = 12
-        return button
-    }()
     
     lazy var instaButton : UIButton = {
         let button = UIButton()
-//        button.setImage(UIImage(named: "youtube"), for: .normal)
-        if UIViewController().isSmalliPhone(){
-            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        }else{
-            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        }
-        button.backgroundColor = .white
-//        button.startAnimatingPressActions()
+        button.setImage(UIImage(named: "instagram"), for: .normal)
+        button.imageView?.image = UIImage(named: "instagram")
+        button.imageView?.contentMode = .scaleAspectFit
         button.tag = 2
+//        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
-        button.layer.cornerRadius = 12
         return button
     }()
     
     lazy var twitterButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "twitter"), for: .normal)
-        if UIViewController().isSmalliPhone(){
-            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        }else{
-            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        }
-        button.backgroundColor = .white
 //        button.startAnimatingPressActions()
         button.tag = 1
+        button.imageView?.contentMode = .scaleAspectFit
+//        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
-        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    
+    lazy var facebookButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "facebook"),for: .normal)
+       
+//        button.startAnimatingPressActions()
+        button.tag = 0
+        button.imageView?.contentMode = .scaleAspectFit
+//        button.layer.cornerRadius = 12
+//        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var linkedInButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "bird"), for: .normal)
-        if UIViewController().isSmalliPhone(){
-            button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        }else{
-            button.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        }
-        button.backgroundColor = .white
+        button.setImage(UIImage(named: "linkedin"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
 //        button.startAnimatingPressActions()
         button.tag = 1
+//        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
-        button.layer.cornerRadius = 12
         return button
     }()
     
+    
+    lazy var containerView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "articleCellBG")
+        let wid = UIViewController().view.frame.width-20
+        let dim = (wid-50)/5-10
+        print("Button size:",dim)
+//        view.backgroundColor = UIColor.darkGray
+        view.layer.cornerRadius = 12
+        view.isUserInteractionEnabled = true
+    
+//        let stackView = UIStackView(arrangedSubviews: [instaButton,twitterButton,facebookButton,linkedInButton])
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fillEqually
+//        stackView.spacing = 14
+//
+//
+//        view.addSubview(stackView)
+//        _ = stackView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 16, leftConstant: 20, bottomConstant: 16, rightConstant: 20)
+        
+        let paddingDiff = (wid-(dim*4)-32)/3
+ 
+        view.addSubview(instaButton)
+        instaButton.centerY(inView: view, leftAnchor: view.leftAnchor, paddingLeft: 16)
+        instaButton.setDimensions(width: dim, height: dim)
+
+        view.addSubview(twitterButton)
+        twitterButton.centerY(inView: view, leftAnchor: instaButton.rightAnchor, paddingLeft: paddingDiff)
+        twitterButton.setDimensions(width: dim, height: dim)
+
+        view.addSubview(facebookButton)
+        facebookButton.centerY(inView: view, leftAnchor: twitterButton.rightAnchor, paddingLeft: paddingDiff)
+        facebookButton.setDimensions(width: dim, height: dim)
+
+        view.addSubview(linkedInButton)
+        linkedInButton.centerY(inView: view, leftAnchor: facebookButton.rightAnchor, paddingLeft: paddingDiff)
+        linkedInButton.setDimensions(width: dim, height: dim)
+        
+        return view
+    }()
     
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor(named: "defaultBG")
+       addSubview(containerView)
         
-        let stackView = UIStackView(arrangedSubviews: [instaButton,twitterButton,facebookButton,linkedInButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 8
-        
-        addSubview(stackView)
-        _ = stackView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, heightConstant: UIViewController().view.frame.width/4)
+        _ = containerView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 10, rightConstant: 10)
         
     }
     
@@ -200,51 +225,55 @@ class SocialTableViewController: UITableViewController{
         
         twitter?.verifyCredentials(userSuccessBlock: { username, userId in
             
-            twitter?.getStatusesUserTimeline(forUserID: "", screenName: "themitpost", sinceID: nil, count: "20", maxID: nil, trimUser: nil, excludeReplies: 0, contributorDetails: 0, includeRetweets: 0, useExtendedTweetMode: 0, successBlock: { statuses in
+            twitter?.getStatusesUserTimeline(forUserID: "", screenName: "themitpost", sinceID: nil, count: "20", maxID: nil, trimUser: nil, excludeReplies: 0, contributorDetails: 0, includeRetweets: 0, useExtendedTweetMode: 1, successBlock: { statuses in
+
                 self.tweets = [Tweet]()
                     for status in statuses! {
                         var tweetText = ""
-                        var tweetURL = ""
-                        var date = ""
-                        var time = ""
-//                        print(status)
-                        if let tweet = (status as AnyObject)["text"]! as? String
+                        var tweetId = ""
+                        var createdAt = ""
+
+                        if let tweet = (status as AnyObject)["full_text"]! as? String
                         {
                          tweetText = tweet
                         }
                         
-                        if let url = (status as AnyObject)["expanded_url"]! as? String
+                        if let tweetID = (status as AnyObject)["id_str"]! as? String
                         {
-                         print(url)
+                            tweetId = tweetID
                         }
-                        self.tweets?.append(Tweet(tweet: tweetText, tweetLink: "", time: "", date: ""))
+                        
+                        
+//                        if let entity = (status as AnyObject)["entities"]! as? NSDictionary
+//                        {
+////                            print(entity["media"])
+//
+//                            if let mediaContainer = (entity as AnyObject)["media"]! as? NSArray{
+//                              let mediaDict = (mediaContainer[0] as? NSDictionary)
+//
+//                                if let url = mediaDict?["display_url"] as? String{
+////                                    print(url)
+//                                    tweetURL = url
+//                                }
+//
+//                            }
+//                        }
+                        
+                        if let createdDate = (status as AnyObject)["created_at"]! as? String
+                        {
+                         createdAt = createdDate
+                        }
+                        
+                       let tweetURL = "https://twitter.com/themitpost/status/" + tweetId
+                        self.tweets?.append(Tweet(tweet: tweetText, tweetLink: tweetURL, createdAt: createdAt))
                     }
                 
                
             }, errorBlock: { error in
-                print(error)
+                print("Error in fetching tweets",error)
             })
-        
-            
-            
-//            twitter?.getHomeTimeline(sinceID: nil, count: 5, successBlock: { statuses in
-//
-//                self.tweets = [Tweet]()
-//                for status in statuses! {
-//                    print(status)
-//                    if let tweetText = (status as AnyObject)["text"]! as? String
-//                    {
-//                        self.tweets?.append(Tweet(tweet: tweetText))
-//                    }
-//                }
-////                    let textData = status["text"]
-//
-//
-//            }, errorBlock: { error in
-//                print("Error in getting tweets")
-//            })
         }, errorBlock: { error in
-            print(error)
+            print("Error in fetching tweets",error)
         })
         
         
@@ -254,14 +283,15 @@ class SocialTableViewController: UITableViewController{
     //    MARK: - UI Configuration
     
     fileprivate func setupNavigationBar(){
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Social Media"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
     }
     
     
     fileprivate func setupTableView(){
-        let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: 180)
+        let height = (UIViewController().view.frame.width/4+10)
+        let frame = CGRect(x: 0, y: 88, width: view.frame.width, height: height)
         let headerView = SocialHeaderView(frame: frame)
 //        headerView.backgroundColor = .white
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -279,24 +309,36 @@ class SocialTableViewController: UITableViewController{
     // MARK: - Helper/Objective c functions
 
     @objc func infoPressed(){
-        print("Do something")
-        let vc = InfoTableViewController()
+        let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func handleTwitterFollow(section:Int){
-        print("Twitter")
-        
+        if let url = URL(string: Networking.sharedInstance.twitterFollowURL) {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+
+               let vc = SFSafariViewController(url: url, configuration: config)
+               present(vc, animated: true)
+        }
     }
     
     @objc func handleInstaFollow(section:Int){
-        print("Insta")
-        
+    
+        if let url = URL(string: Networking.sharedInstance.instaFollowURL) {
+               let config = SFSafariViewController.Configuration()
+               config.entersReaderIfAvailable = true
+
+               let vc = SFSafariViewController(url: url, configuration: config)
+               present(vc, animated: true)
+        }
     }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 2
     }
 
@@ -317,6 +359,9 @@ class SocialTableViewController: UITableViewController{
         if indexPath.section == 0{
             return 220
         }
+        else if indexPath.section == 1{
+            return UITableView.automaticDimension
+        }
         else{
             return UITableView.automaticDimension
         }
@@ -336,6 +381,7 @@ class SocialTableViewController: UITableViewController{
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
             cell.tweetlabel.text = tweets?[indexPath.row].tweet
+           // print(tweets?[indexPath.row].tweet)
             return cell
         default:
             return UITableViewCell()
@@ -360,7 +406,13 @@ class SocialTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .init(45)
+        
+        if section == 0{
+            return .init(45)
+        }else{
+            return .init(55)
+        }
+       
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -371,8 +423,21 @@ class SocialTableViewController: UITableViewController{
            return UIView()
        }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1{
+            if tweets?.count == 0{
+                return
+            }
+            guard let tweetURL = tweets?[indexPath.row].tweetLink else {return }
+            
+            if let url = URL(string: tweetURL) {
+                   let config = SFSafariViewController.Configuration()
 
+                   let vc = SFSafariViewController(url: url, configuration: config)
+                   present(vc, animated: true)
+               }
+        }
+    }
 }
 
 

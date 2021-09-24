@@ -33,7 +33,7 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height+100
+//        self.tabBarController?.tabBar.frame.origin.y = self.view.frame.height+100
 
     }
 
@@ -42,6 +42,7 @@ class InstaFullScreenController: UIViewController, UITableViewDelegate, UITableV
         view.backgroundColor = UIColor(named: "defaultBG")
         view.addSubview(tableView)
         tableView.fillSuperview()
+        //anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         tableView.register(InstaCaptionCell.self, forCellReuseIdentifier: instaCellIdentifier)
         

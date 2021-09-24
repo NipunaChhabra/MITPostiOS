@@ -18,11 +18,41 @@ class TwitterTableViewCell : SocialCell{
         view.layer.cornerRadius = 10
         return view
     }()
+    
+    lazy var twitterProfileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.setDimensions(width: 30, height: 30)
+        iv.layer.cornerRadius = 30/2
+        iv.layer.masksToBounds = true
+        iv.image = UIImage(named: "postLogo")
+        iv.clipsToBounds = true
+//        iv.backgroundColor = .white
+//        iv.layer.borderWidth = 0.5
+        return iv
+    }()
+    
+    lazy var twitterUsernameLabel: UILabel = {
+        let label = UILabel()
+        let postLabel = NSMutableAttributedString(string: "The MIT Post ", attributes: [.font: UIFont.boldSystemFont(ofSize: 17)])
+        postLabel.append(NSAttributedString(string: "@themitpost", attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.gray]))
+        label.attributedText = postLabel
+//        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        
+         
+        return label
+    }()
      
     lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Wed - May 26,2021"
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "Fri - Jul 02,2021"
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.systemFont(ofSize: 13)
+        }else{
+            label.font = UIFont.systemFont(ofSize: 15)
+        }
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = .gray
@@ -31,19 +61,26 @@ class TwitterTableViewCell : SocialCell{
     
     lazy var tweetlabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.systemFont(ofSize: 13)
+        }else{
+            label.font = UIFont.systemFont(ofSize: 15)
+        }
         label.numberOfLines = 0
-        label.text = "Checkingg wowornwjrenwnr/nskdfnsdfnksfn\n sdnfksdfnskdfndskf \n jadshfkjadfsdfnklsd"
+        label.text = ""
         label.textAlignment = .left
-//        label.adjustsFontSizeToFitWidth = true
-//        label.minimumScaleFactor = 0.2
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "11:41pm"
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "6:43pm"
+        if UIViewController().isSmalliPhone(){
+            label.font = UIFont.systemFont(ofSize: 13)
+        }else{
+            label.font = UIFont.systemFont(ofSize: 15)
+        }
         label.numberOfLines = 1
         label.textAlignment = .left
         label.textColor = .gray
@@ -62,9 +99,17 @@ class TwitterTableViewCell : SocialCell{
     func setupLayout(){
         addSubview(tweetView)
         
+        addSubview(twitterProfileImageView)
+        
+        _ = twitterProfileImageView.anchor(top: topAnchor, left: tweetView.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 0)
+        
+        addSubview(twitterUsernameLabel)
+        
+        _ = twitterUsernameLabel.anchor(top: topAnchor, left: twitterProfileImageView.rightAnchor, bottom: nil, right: rightAnchor, topConstant: 14, leftConstant: 8, bottomConstant: 0, rightConstant: 8)
+        
         
         addSubview(tweetlabel)
-        _ = tweetlabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 20, bottomConstant: 0, rightConstant: 20)
+        _ = tweetlabel.anchor(top: twitterProfileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 20)
         
         let stackView = UIStackView(arrangedSubviews: [dateLabel,timeLabel])
         stackView.axis = .horizontal
@@ -74,7 +119,7 @@ class TwitterTableViewCell : SocialCell{
         _ = stackView.anchor(top: tweetlabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 20, leftConstant: 20, bottomConstant: 20, rightConstant: 20, heightConstant: 16)
         
         
-        _ = tweetView.anchor(top: tweetlabel.topAnchor, left: leftAnchor, bottom: stackView.bottomAnchor, right: rightAnchor, topConstant: -10, leftConstant: 10, bottomConstant: -16, rightConstant: 10)
+        _ = tweetView.anchor(top: twitterProfileImageView.topAnchor, left: leftAnchor, bottom: stackView.bottomAnchor, right: rightAnchor, topConstant: -10, leftConstant: 10, bottomConstant: -10, rightConstant: 10)
     
         
     }

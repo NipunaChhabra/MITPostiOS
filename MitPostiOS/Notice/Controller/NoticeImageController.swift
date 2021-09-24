@@ -29,7 +29,8 @@ class NoticeImageController: UIViewController {
         view.backgroundColor = UIColor(named: "defaultBG")
         
         view.addSubview(noticeImageView)
-        noticeImageView.centerY(inView: view)
+        noticeImageView.center(inView: view)
+//        centerY(inView: view)
         
         noticeImageView.sd_setImage(with: URL(string: imageLink!), completed: nil)
         

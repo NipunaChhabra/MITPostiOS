@@ -12,6 +12,7 @@ import Disk
  let noticesCache = "notices.json"
  let instagramCache = "instagram.json"
  let magazineCache = "magazine.json"
+ let slcmCache = "slcm.json"
 // let 
 
  
@@ -46,6 +47,14 @@ struct Caching{
     func saveInstagramDataToCache(instagramData: [Instagram]){
         do{
             try Disk.save(instagramData, to: .caches, as: instagramCache)
+        }catch let error{
+            print(error)
+        }
+    }
+    
+    func saveSlcmDataToCache(slcmData: SlcmData?){
+        do{
+            try Disk.save(slcmData, to: .caches, as: slcmCache)
         }catch let error{
             print(error)
         }

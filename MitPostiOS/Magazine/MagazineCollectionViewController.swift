@@ -27,6 +27,8 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
         }
     }
     
+    let popUp = SpinnerPopUp()
+    
     
 // MARK:- Lifecycle functions
     
@@ -120,7 +122,10 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.collectionView.isUserInteractionEnabled = false
+        DispatchQueue.main.async {
+            self.collectionView.addSubview(self.popUp)
+            self.collectionView.isUserInteractionEnabled = false
+        }
         if let pdfLink = magazines?[indexPath.item].pdfLink{
             let url: URL! = URL(string: pdfLink)
             if let title = magazines?[indexPath.item].title{
@@ -135,9 +140,12 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
         vc.pdfTitle = pdfTitle
         vc.hidesBottomBarWhenPushed = true
         FileDownloader.loadFileAsync(url: pdfURL) { pdfLocation, error in
-            self.collectionView.isUserInteractionEnabled = true
+            
             vc.pdfLink = pdfLocation ?? ""
             DispatchQueue.main.async {
+                self.popUp.hideSpinner()
+                self.popUp.removeFromSuperview()
+                self.collectionView.isUserInteractionEnabled = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -157,3 +165,6 @@ class MagazineViewController: UICollectionViewController, UICollectionViewDelega
     }
         
 }
+
+
+

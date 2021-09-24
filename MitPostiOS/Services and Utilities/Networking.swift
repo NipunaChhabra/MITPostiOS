@@ -46,6 +46,14 @@ struct Networking{
     fileprivate let instaURL = "https://app.themitpost.com/social/instagram/posts"
     fileprivate let magazineURL = "https://app.themitpost.com/magazines"
     fileprivate let eventsURL = "https://app.themitpost.com/events"
+    let twitterFollowURL = "https://twitter.com/themitpost"
+    let instaFollowURL = "https://www.instagram.com/themitpost/"
+    
+    //SLCM
+    fileprivate let  attendanceDatabaseReferenceURL =
+        "https://app.themitpost.com/slcm/attendance";
+    fileprivate let captchaServingURL =
+        "https://app.themitpost.com/slcm/captcha";
     
     static let sharedInstance = Networking()
     
@@ -169,6 +177,75 @@ struct Networking{
 
             DispatchQueue.main.async {
                 dataCompletion(responseObject)
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getCaptchaData(method : String ,dataCompletion: @escaping (_ Data: CaptchaModel) -> (),  errorCompletion: @escaping (_ ErrorMessage: Error) -> ()){
+        
+        guard let url = URL(string: captchaServingURL) else {return}
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
+        let session = URLSession(configuration: .default)
+        let dataTask = session.dataTask(with: urlRequest) { data, response, error in
+            if let err = error {
+                errorCompletion(err)
+                print(err.localizedDescription)
+                return
+            }
+            guard response != nil, let data = data else {
+                return
+            }
+            let responseObject = try! JSONDecoder().decode(CaptchaModel.self, from: data)
+            
+
+            DispatchQueue.main.async {
+                dataCompletion(responseObject)
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getSLCMData(method : String ,id :String, token: String, registration : String, password:String ,dataCompletion: @escaping (_ Data: SlcmData?) -> (),  errorCompletion: @escaping (_ ErrorMessage: Error) -> ()){
+        
+        
+        let parameters: [String: Any] = [
+            "id":id,
+            "token":token,
+            "registration":registration,
+            "password":password
+        ]
+        
+        guard let url = URL(string: attendanceDatabaseReferenceURL) else {return}
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
+        
+        do {
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let session = URLSession(configuration: .default)
+        let dataTask = session.dataTask(with: urlRequest) { data, response, error in
+            if let err = error {
+                errorCompletion(err)
+                print(err.localizedDescription)
+                return
+            }
+            guard response != nil, let data = data else {
+                return
+            }
+            let responseObject = try! JSONDecoder().decode(SlcmResponse.self, from: data)
+           // print(responseObject.success)
+            //print(responseObject.msg)
+
+            DispatchQueue.main.async {
+                dataCompletion(responseObject.data)
             }
         }
         dataTask.resume()

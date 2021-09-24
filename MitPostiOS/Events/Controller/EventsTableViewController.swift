@@ -12,7 +12,8 @@ import Disk
 class EventsTableViewController: UITableViewController, SFSafariViewControllerDelegate {
     
 //    MARK:- Properties
-    private let articleCellID = "ArticleCell"
+    private let eventReportCellID = "EventReportCell"
+    private let eventCellID = "EventCell"
     
     var articles : [ArticleModel]?{
         didSet{
@@ -44,13 +45,14 @@ class EventsTableViewController: UITableViewController, SFSafariViewControllerDe
        
     fileprivate func setupNavigationBar(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3")?.withTintColor(.orange, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(infoPressed))
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Events"
     }
     
     fileprivate func configureTableView(){
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
-        tableView.register(ArticleCell.self, forCellReuseIdentifier: articleCellID)
+        tableView.register(ArticleCell.self, forCellReuseIdentifier: eventReportCellID)
+        tableView.register(EventCell.self, forCellReuseIdentifier: eventCellID)
         tableView.backgroundColor = UIColor(named: "defaultBG")
         view.backgroundColor = UIColor(named: "defaultBG")
         tableView.tableFooterView = UIView()
@@ -60,8 +62,8 @@ class EventsTableViewController: UITableViewController, SFSafariViewControllerDe
     
     
     @objc func infoPressed(){
-        print("Do something")
-        let vc = InfoTableViewController()
+        let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -110,8 +112,11 @@ class EventsTableViewController: UITableViewController, SFSafariViewControllerDe
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         let headerLabel = UILabel()
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        
+        if UIViewController().isSmalliPhone(){
+            headerLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        }else{
+            headerLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        }
         
         switch section {
         case 0:
@@ -155,12 +160,12 @@ class EventsTableViewController: UITableViewController, SFSafariViewControllerDe
         
         switch indexPath.section{
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: eventCellID, for: indexPath) as! EventCell
             cell.selectionStyle = .none
             return cell
             
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: articleCellID, for: indexPath) as! ArticleCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: eventReportCellID, for: indexPath) as! ArticleCell
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
             cell.articleData = articles?[indexPath.row]

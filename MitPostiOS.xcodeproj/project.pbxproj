@@ -15,7 +15,6 @@
 		C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE556268902230003C6F4 /* SLCMViewController.swift */; };
 		C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE558268902690003C6F4 /* EventsTableViewController.swift */; };
 		C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */; };
-		C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */; };
 		C60CBE52269DC3160053D0F9 /* MagazineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE51269DC3160053D0F9 /* MagazineModel.swift */; };
 		C60CBE54269DCB9D0053D0F9 /* MagazineCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE53269DCB9D0053D0F9 /* MagazineCollectionViewController.swift */; };
 		C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60CBE55269DCCD40053D0F9 /* MagazineCell.swift */; };
@@ -23,6 +22,7 @@
 		C64B083F268A49D800696FEA /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B083E268A49D800696FEA /* Networking.swift */; };
 		C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0840268A50ED00696FEA /* ArticleCell.swift */; };
 		C64B0843268A5FB000696FEA /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64B0842268A5FB000696FEA /* ArticleModel.swift */; };
+		C660905426B7013700E56FF9 /* Slcm Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C660905326B7013700E56FF9 /* Slcm Model.swift */; };
 		C666AA332690B17800C37684 /* SearchTagsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666AA322690B17800C37684 /* SearchTagsController.swift */; };
 		C667929A26A721C000438A59 /* InstaFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C667929926A721C000438A59 /* InstaFullScreenController.swift */; };
 		C67005142690EFA600878694 /* NoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67005132690EFA600878694 /* NoticeModel.swift */; };
@@ -35,9 +35,15 @@
 		C674B0A526A13CE500BB3D20 /* ArticleWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674B0A426A13CE500BB3D20 /* ArticleWebView.swift */; };
 		C68D47AA26A892CD00D4545C /* TwitterBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C68D47A926A892CD00D4545C /* TwitterBridge.m */; };
 		C68D47AF26AC119A00D4545C /* SlcmInternalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */; };
+		C6B775DD26F0863200FEF9DB /* UpcomingEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B775DC26F0863200FEF9DB /* UpcomingEvents.swift */; };
 		C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */; };
+		C6C36CA426F2FF3D005FB066 /* SLCMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C36CA326F2FF3D005FB066 /* SLCMCell.swift */; };
+		C6C36CA826F30CD3005FB066 /* SLCMHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C36CA726F30CD3005FB066 /* SLCMHeaderView.swift */; };
 		C6C8C559268CD033008A6799 /* InstagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */; };
 		C6C8C55B268CD13A008A6799 /* InstagramHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */; };
+		C6E4B0BC26B9D117001C1FF4 /* InfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E4B0BB26B9D117001C1FF4 /* InfoCollectionViewController.swift */; };
+		C6E4B0BE26B9D36E001C1FF4 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E4B0BD26B9D36E001C1FF4 /* InfoCollectionViewCell.swift */; };
+		C6FA856226FB67840045AD59 /* SLCMHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FA856126FB67840045AD59 /* SLCMHeaderCell.swift */; };
 		C6FDE0042688F8BF00CBC270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */; };
 		C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */; };
 		C6FDE0082688F8BF00CBC270 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDE0072688F8BF00CBC270 /* ArticleViewController.swift */; };
@@ -57,7 +63,6 @@
 		C60AE556268902230003C6F4 /* SLCMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLCMViewController.swift; sourceTree = "<group>"; };
 		C60AE558268902690003C6F4 /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
 		C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticesTableViewController.swift; sourceTree = "<group>"; };
-		C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
 		C60CBE51269DC3160053D0F9 /* MagazineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineModel.swift; sourceTree = "<group>"; };
 		C60CBE53269DCB9D0053D0F9 /* MagazineCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineCollectionViewController.swift; sourceTree = "<group>"; };
 		C60CBE55269DCCD40053D0F9 /* MagazineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineCell.swift; sourceTree = "<group>"; };
@@ -65,6 +70,7 @@
 		C64B083E268A49D800696FEA /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C64B0840268A50ED00696FEA /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		C64B0842268A5FB000696FEA /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		C660905326B7013700E56FF9 /* Slcm Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Slcm Model.swift"; sourceTree = "<group>"; };
 		C666AA322690B17800C37684 /* SearchTagsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTagsController.swift; sourceTree = "<group>"; };
 		C667929926A721C000438A59 /* InstaFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaFullScreenController.swift; sourceTree = "<group>"; };
 		C67005132690EFA600878694 /* NoticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeModel.swift; sourceTree = "<group>"; };
@@ -78,9 +84,15 @@
 		C68D47A826A892CD00D4545C /* MitPostiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MitPostiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C68D47A926A892CD00D4545C /* TwitterBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwitterBridge.m; sourceTree = "<group>"; };
 		C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlcmInternalController.swift; sourceTree = "<group>"; };
+		C6B775DC26F0863200FEF9DB /* UpcomingEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEvents.swift; sourceTree = "<group>"; };
 		C6BAA3F4268CAD7000D3ED11 /* TwitterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCell.swift; sourceTree = "<group>"; };
+		C6C36CA326F2FF3D005FB066 /* SLCMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLCMCell.swift; sourceTree = "<group>"; };
+		C6C36CA726F30CD3005FB066 /* SLCMHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLCMHeaderView.swift; sourceTree = "<group>"; };
 		C6C8C558268CD033008A6799 /* InstagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramTableViewCell.swift; sourceTree = "<group>"; };
 		C6C8C55A268CD13A008A6799 /* InstagramHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramHorizontalController.swift; sourceTree = "<group>"; };
+		C6E4B0BB26B9D117001C1FF4 /* InfoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewController.swift; sourceTree = "<group>"; };
+		C6E4B0BD26B9D36E001C1FF4 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		C6FA856126FB67840045AD59 /* SLCMHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLCMHeaderCell.swift; sourceTree = "<group>"; };
 		C6FDE0002688F8BF00CBC270 /* MitPostiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MitPostiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FDE0032688F8BF00CBC270 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6FDE0052688F8BF00CBC270 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -183,7 +195,6 @@
 				C674B0A126A13A3000BB3D20 /* NoticeCell.swift */,
 				C67EA1762696E5EB0020CDD1 /* Model */,
 				C67EA1752696E5DA0020CDD1 /* Controller */,
-				C6722D4B26A871BB00C940F7 /* NoticeImageController.swift */,
 			);
 			path = Notice;
 			sourceTree = "<group>";
@@ -191,6 +202,7 @@
 		C67EA1752696E5DA0020CDD1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C6722D4B26A871BB00C940F7 /* NoticeImageController.swift */,
 				C60AE55A2689027A0003C6F4 /* NoticesTableViewController.swift */,
 			);
 			path = Controller;
@@ -207,8 +219,9 @@
 		C67EA1772696E6E20020CDD1 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				C60AE558268902690003C6F4 /* EventsTableViewController.swift */,
-				C6722D4D26A88FAF00C940F7 /* EventsModel.swift */,
+				C6C36CAA26F30D38005FB066 /* Controller */,
+				C6C36CA926F30D31005FB066 /* Model */,
+				C6C36CAB26F30D40005FB066 /* View */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -218,8 +231,52 @@
 			children = (
 				C60AE556268902230003C6F4 /* SLCMViewController.swift */,
 				C68D47AE26AC119A00D4545C /* SlcmInternalController.swift */,
+				C6C36CA526F30C89005FB066 /* Model */,
+				C6C36CA626F30CBA005FB066 /* View */,
 			);
 			path = SLCM;
+			sourceTree = "<group>";
+		};
+		C6C36CA526F30C89005FB066 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C660905326B7013700E56FF9 /* Slcm Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C6C36CA626F30CBA005FB066 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C6C36CA326F2FF3D005FB066 /* SLCMCell.swift */,
+				C6C36CA726F30CD3005FB066 /* SLCMHeaderView.swift */,
+				C6FA856126FB67840045AD59 /* SLCMHeaderCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C6C36CA926F30D31005FB066 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C6722D4D26A88FAF00C940F7 /* EventsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C6C36CAA26F30D38005FB066 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C60AE558268902690003C6F4 /* EventsTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C6C36CAB26F30D40005FB066 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C6B775DC26F0863200FEF9DB /* UpcomingEvents.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C6C8C55C268CDEDF008A6799 /* Social */ = {
@@ -295,9 +352,10 @@
 				C68D47AB26ABFBB300D4545C /* SLCM */,
 				C67EA1772696E6E20020CDD1 /* Events */,
 				C67EA1742696E5D00020CDD1 /* Notice */,
-				C60AE55C26890B7E0003C6F4 /* InfoTableViewController.swift */,
 				C6FDE0112688F8C100CBC270 /* LaunchScreen.storyboard */,
 				C6C8C55F268CDF20008A6799 /* Services and Utilities */,
+				C6E4B0BB26B9D117001C1FF4 /* InfoCollectionViewController.swift */,
+				C6E4B0BD26B9D36E001C1FF4 /* InfoCollectionViewCell.swift */,
 			);
 			path = MitPostiOS;
 			sourceTree = "<group>";
@@ -431,9 +489,10 @@
 				C6FDE0042688F8BF00CBC270 /* AppDelegate.swift in Sources */,
 				C60CBE54269DCB9D0053D0F9 /* MagazineCollectionViewController.swift in Sources */,
 				C64B083F268A49D800696FEA /* Networking.swift in Sources */,
+				C6E4B0BE26B9D36E001C1FF4 /* InfoCollectionViewCell.swift in Sources */,
+				C6FA856226FB67840045AD59 /* SLCMHeaderCell.swift in Sources */,
 				C64B0841268A50ED00696FEA /* ArticleCell.swift in Sources */,
 				C674B0A526A13CE500BB3D20 /* ArticleWebView.swift in Sources */,
-				C60AE55D26890B7E0003C6F4 /* InfoTableViewController.swift in Sources */,
 				C6C8C559268CD033008A6799 /* InstagramTableViewCell.swift in Sources */,
 				C666AA332690B17800C37684 /* SearchTagsController.swift in Sources */,
 				C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */,
@@ -443,6 +502,8 @@
 				C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */,
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
+				C6C36CA826F30CD3005FB066 /* SLCMHeaderView.swift in Sources */,
+				C6C36CA426F2FF3D005FB066 /* SLCMCell.swift in Sources */,
 				C6722D4E26A88FAF00C940F7 /* EventsModel.swift in Sources */,
 				C60CBE56269DCCD40053D0F9 /* MagazineCell.swift in Sources */,
 				C667929A26A721C000438A59 /* InstaFullScreenController.swift in Sources */,
@@ -450,13 +511,16 @@
 				C60AE557268902230003C6F4 /* SLCMViewController.swift in Sources */,
 				C67005162690F30A00878694 /* Caching.swift in Sources */,
 				C67005142690EFA600878694 /* NoticeModel.swift in Sources */,
+				C6B775DD26F0863200FEF9DB /* UpcomingEvents.swift in Sources */,
 				C670051A2690F95B00878694 /* InstagramCollectionViewCell.swift in Sources */,
 				C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */,
 				C60CBE58269DE2290053D0F9 /* MagazinePDFController.swift in Sources */,
 				C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */,
 				C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */,
 				C68D47AA26A892CD00D4545C /* TwitterBridge.m in Sources */,
+				C660905426B7013700E56FF9 /* Slcm Model.swift in Sources */,
 				C67005182690F74A00878694 /* SocialModels.swift in Sources */,
+				C6E4B0BC26B9D117001C1FF4 /* InfoCollectionViewController.swift in Sources */,
 				C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */,
 				C68D47AF26AC119A00D4545C /* SlcmInternalController.swift in Sources */,
 			);

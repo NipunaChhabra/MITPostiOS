@@ -72,10 +72,11 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        if indexValue != nil{
-            tagsController.indexValue = indexValue
-            tagsController.collectionView.reloadData()
-        }
+//        self.tagsController.collectionView.deselectAllItems(animated: false)
+//        self.tagsController.collectionView.reloadData()
+//        
+//        self.indexValue = UserDefaults.standard.object(forKey: "indexValue") as? Int ?? 0
+//        self.tagsController.collectionView.selectItem(at: IndexPath(item: indexValue!, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
     
     func getCachedArticles(){
@@ -103,9 +104,8 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func infoPressed(){
-        let vc =  MagazineViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        //InfoTableViewController()
-//        let nav = UINavigationController(rootViewController: vc)
+        let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -135,11 +135,9 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     
     private func setupUI(){
         tagsController.delegate = self
-        if self.indexValue != nil{
-            tagsController.indexValue = indexValue
-        }else{
-            tagsController.indexValue = 0
-        }
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "indexValue")
+        defaults.synchronize()
         let tagsView = tagsController.view!
         tagsController.specialColor = UIColor.systemOrange
 //
@@ -185,7 +183,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
         openWebView(urlString: url)
     }
     
-    private func openWebView(urlString : String){
+     func openWebView(urlString : String){
         if let url = URL(string: urlString) {
                let config = SFSafariViewController.Configuration()
                config.entersReaderIfAvailable = true
