@@ -15,7 +15,7 @@ protocol SearchTagsControllerDelegate {
 
 class SearchTagsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var indexValue:Int?
+    var selectedIndexPath:IndexPath?
         
         fileprivate let cellId = "cellId"
         
@@ -24,6 +24,9 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
 //                collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
             }
         }
+    
+    let defaults = UserDefaults.standard
+    var selectedTag:String = "All"
         var specialColor: UIColor?
         
         var delegate: SearchTagsControllerDelegate?
@@ -49,8 +52,19 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-    }
+//        if let indexPath = selectedIndexPath{
+//        if let cell = self.collectionView.cellForItem(at: indexPath) as? TagCell{
+//            print(tags[indexPath.item])
+//            defaults.set(tags[indexPath.item], forKey: "indexValue")
+//            defaults.synchronize()
+//            cell.highlight = true
+//            self.collectionView.reloadData()
+//
+//
+//
+//        }
+//    }
+}
         
         
         override func viewDidLoad() {
@@ -75,31 +89,21 @@ class SearchTagsController: UICollectionViewController, UICollectionViewDelegate
     
         override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
-            collectionView.deselectAllItems(animated: false)
-            collectionView.reloadData()
-            let defaults = UserDefaults.standard
-            self.indexValue = defaults.object(forKey: "indexValue") as? Int ?? 0
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TagCell
-            if self.indexValue == indexPath.item{
-            cell.isSelected = true
-            }
-//
-            defaults.set(indexPath.item, forKey: "indexValue")
+            self.selectedIndexPath = indexPath
+            defaults.set(tags[indexPath.item], forKey: "indexValue")
             defaults.synchronize()
             delegate?.didTapTag(indexPath: indexPath)
-           
         }
         
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TagCell
+            
             cell.label.text = tags[indexPath.item]
             
-            let defaults = UserDefaults.standard
-            self.indexValue = defaults.object(forKey: "indexValue") as? Int ?? 0
-
-            if self.indexValue == indexPath.item{
-            cell.isSelected = true
+            let indexTag = defaults.object(forKey: "indexValue") as? String ?? ""
+            if self.selectedIndexPath == indexPath{
+                cell.isSelected = true
             }
             return cell
         }
@@ -164,6 +168,17 @@ class TagCell: UICollectionViewCell {
         }
     }
     
+    var highlight : Bool = false
+//            guard let h = self.highlight else{return}
+//            label.textColor = h ? .white : .lightGray
+//            if UIViewController().isSmalliPhone(){
+//                label.font = h ? UIFont.systemFont(ofSize: 12, weight: .medium) : UIFont.systemFont(ofSize: 12, weight: .regular)
+//            }else{
+//                label.font = h ? UIFont.systemFont(ofSize: 14, weight: .medium) : UIFont.systemFont(ofSize: 14, weight: .regular)
+//            }
+//            backgroundCardView.backgroundColor = h ? UIColor.systemOrange: UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.12)
+//    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(backgroundCardView)
@@ -171,6 +186,16 @@ class TagCell: UICollectionViewCell {
         
         backgroundCardView.addSubview(label)
         label.anchorWithConstants(top: backgroundCardView.topAnchor, left: backgroundCardView.leftAnchor, bottom: backgroundCardView.bottomAnchor, right: backgroundCardView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 8)
+        
+        
+            label.textColor = highlight ? .white : .lightGray
+            if UIViewController().isSmalliPhone(){
+                label.font = highlight ? UIFont.systemFont(ofSize: 12, weight: .medium) : UIFont.systemFont(ofSize: 12, weight: .regular)
+            }else{
+                label.font = highlight ? UIFont.systemFont(ofSize: 14, weight: .medium) : UIFont.systemFont(ofSize: 14, weight: .regular)
+            }
+            backgroundCardView.backgroundColor = highlight ? UIColor.systemOrange: UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 0.12)
+            
     }
     
     required init?(coder aDecoder: NSCoder) {

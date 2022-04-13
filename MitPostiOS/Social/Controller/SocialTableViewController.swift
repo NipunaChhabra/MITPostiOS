@@ -28,6 +28,7 @@ class SocialHeaderView : UIView{
         button.setImage(UIImage(named: "instagram"), for: .normal)
         button.imageView?.image = UIImage(named: "instagram")
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.clipsToBounds = true
         button.tag = 2
 //        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
@@ -40,6 +41,7 @@ class SocialHeaderView : UIView{
 //        button.startAnimatingPressActions()
         button.tag = 1
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.clipsToBounds = true
 //        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
         return button
@@ -53,6 +55,7 @@ class SocialHeaderView : UIView{
 //        button.startAnimatingPressActions()
         button.tag = 0
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.clipsToBounds = true
 //        button.layer.cornerRadius = 12
 //        button.addTarget(self, action: #selector(handleSocial(button:)), for: .touchUpInside)
         return button
@@ -62,6 +65,7 @@ class SocialHeaderView : UIView{
         let button = UIButton()
         button.setImage(UIImage(named: "linkedin"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.clipsToBounds = true
 //        button.startAnimatingPressActions()
         button.tag = 1
 //        button.layer.cornerRadius = 12

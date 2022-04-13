@@ -15,6 +15,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
 //    MARK:-  Properties
     
     var indexValue: Int?
+    var selectedTagIndexpath:IndexPath?
     
     var filteredArticles: [ArticleModel]?{
         didSet{
@@ -73,8 +74,10 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         super.viewWillAppear(animated)
 //        self.tagsController.collectionView.deselectAllItems(animated: false)
-//        self.tagsController.collectionView.reloadData()
-//        
+        self.tagsController.collectionView.reloadData()
+        if let indexPath = selectedTagIndexpath{
+        self.tagsController.selectedIndexPath = indexPath
+        }
 //        self.indexValue = UserDefaults.standard.object(forKey: "indexValue") as? Int ?? 0
 //        self.tagsController.collectionView.selectItem(at: IndexPath(item: indexValue!, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
@@ -111,6 +114,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func didTapTag(indexPath: IndexPath) {
+        self.selectedTagIndexpath = indexPath
         self.indexValue = indexPath.item
         let tag = tags[indexPath.item]
         if tag == "All"{
@@ -136,7 +140,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     private func setupUI(){
         tagsController.delegate = self
         let defaults = UserDefaults.standard
-        defaults.set(0, forKey: "indexValue")
+        defaults.set("All", forKey: "indexValue")
         defaults.synchronize()
         let tagsView = tagsController.view!
         tagsController.specialColor = UIColor.systemOrange
