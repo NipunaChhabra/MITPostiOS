@@ -40,7 +40,7 @@ class InfoCollectionViewController: UICollectionViewController, UICollectionView
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
-    // MARK:- UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -59,7 +59,7 @@ class InfoCollectionViewController: UICollectionViewController, UICollectionView
         return cell
     }
 
-    // MARK:- UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -100,6 +100,7 @@ class InfoCollectionViewController: UICollectionViewController, UICollectionView
             
             
             
+            
         default:
             print("Something")
 
@@ -107,7 +108,7 @@ class InfoCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
     
-//    MARK:-Helper methods and functions
+//    MARK: - Helper methods and functions
     
     fileprivate func openPlaylists(){
         let alertController = UIAlertController(title: "Choose a playlist",message: "", preferredStyle: UIAlertController.Style.alert)
@@ -147,19 +148,27 @@ class InfoCollectionViewController: UICollectionViewController, UICollectionView
         
     }
     
-//    MARK:- Bug Reports
+//    MARK: - Bug Reports
     
     fileprivate func openMail(){
         let emailTitle = "Feedback"
-        let messageBody = "Feature request or bug report?"
-        let toRecipents = ["rohitkuber42@icloud.com"]
-        let mc: MFMailComposeViewController = MFMailComposeViewController()
-        mc.mailComposeDelegate = self
-        mc.setSubject(emailTitle)
-        mc.setMessageBody(messageBody, isHTML: false)
-        mc.setToRecipients(toRecipents)
-
-        self.present(mc, animated: true, completion: nil)
+        let messageBody = "Feature request or bug report"
+        let toRecipents = "rohitkuber42@icloud.com"
+        
+//        if MFMailComposeViewController.canSendMail() {
+//            let mc: MFMailComposeViewController = MFMailComposeViewController()
+//            mc.mailComposeDelegate = self
+//            mc.setSubject(emailTitle)
+//            mc.setMessageBody(messageBody, isHTML: false)
+//            mc.setToRecipients(toRecipents)
+//
+//            present(UINavigationController(rootViewController: mc), animated: true, completion: nil)
+//        }
+        
+        if let url = URL(string: "mailto:\(toRecipents)?subject=\(emailTitle)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
+           UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        
     }
     
     //Will implement later

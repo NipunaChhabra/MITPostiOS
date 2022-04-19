@@ -88,7 +88,7 @@ class InfoCollectionViewCell: UICollectionViewCell {
 //        setCellShadow()
         self.addSubview(infoImageView)
         infoImageView.centerY(inView: contentView, leftAnchor: contentView.leftAnchor, paddingLeft: 10)
-//        _ = infoImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 1, leftConstant: 10, bottomConstant:0, rightConstant: 0)
+        _ = infoImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 22, leftConstant: 10, bottomConstant:0, rightConstant: 0)
         
         self.addSubview(listNameLabel)
         _ = listNameLabel.anchor(top: contentView.topAnchor, left: infoImageView.rightAnchor, bottom:nil, right: nil, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0)
