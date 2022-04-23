@@ -196,15 +196,17 @@ struct Networking{
                 print(err.localizedDescription)
                 return
             }
+            
             guard response != nil, let data = data else {
                 return
             }
-            let responseObject = try! JSONDecoder().decode(CaptchaModel.self, from: data)
             
+            do { let responseObject = try JSONDecoder().decode(CaptchaModel.self, from: data)
+                DispatchQueue.main.async {
+                    dataCompletion(responseObject)
+                }
 
-            DispatchQueue.main.async {
-                dataCompletion(responseObject)
-            }
+            } catch {print("Caught error: \(error)")}
         }
         dataTask.resume()
     }
