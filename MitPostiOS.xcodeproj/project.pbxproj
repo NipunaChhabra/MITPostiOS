@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		35EA592F02841B69945A656B /* Pods_MitPostiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30497F9AB7B52D13CF9F1301 /* Pods_MitPostiOS.framework */; };
+		6461102B281C516D0075E974 /* informationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461102A281C516D0075E974 /* informationVC.swift */; };
+		64611030281C52680075E974 /* rectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461102D281C52680075E974 /* rectCell.swift */; };
+		64611031281C52680075E974 /* squareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461102E281C52680075E974 /* squareCell.swift */; };
+		64611032281C52680075E974 /* singleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461102F281C52680075E974 /* singleCell.swift */; };
 		C60AE54E2688FCD80003C6F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE54D2688FCD80003C6F4 /* Extensions.swift */; };
 		C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE5502688FE060003C6F4 /* MasterTabBarController.swift */; };
 		C60AE553268901A10003C6F4 /* MasterNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE552268901A10003C6F4 /* MasterNavController.swift */; };
@@ -56,6 +60,10 @@
 		04F28976DA3AC0EA6F3A72DD /* Pods-MitPostiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MitPostiOS.release.xcconfig"; path = "Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS.release.xcconfig"; sourceTree = "<group>"; };
 		0DBD640F2C49C516B3FCDBD2 /* Pods-MitPostiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MitPostiOS.debug.xcconfig"; path = "Target Support Files/Pods-MitPostiOS/Pods-MitPostiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		30497F9AB7B52D13CF9F1301 /* Pods_MitPostiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MitPostiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6461102A281C516D0075E974 /* informationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = informationVC.swift; sourceTree = "<group>"; };
+		6461102D281C52680075E974 /* rectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rectCell.swift; sourceTree = "<group>"; };
+		6461102E281C52680075E974 /* squareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = squareCell.swift; sourceTree = "<group>"; };
+		6461102F281C52680075E974 /* singleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleCell.swift; sourceTree = "<group>"; };
 		C60AE54D2688FCD80003C6F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C60AE5502688FE060003C6F4 /* MasterTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTabBarController.swift; sourceTree = "<group>"; };
 		C60AE552268901A10003C6F4 /* MasterNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavController.swift; sourceTree = "<group>"; };
@@ -115,6 +123,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6461102C281C51C50075E974 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				6461102D281C52680075E974 /* rectCell.swift */,
+				6461102F281C52680075E974 /* singleCell.swift */,
+				6461102E281C52680075E974 /* squareCell.swift */,
+				6461102A281C516D0075E974 /* informationVC.swift */,
+			);
+			path = Information;
+			sourceTree = "<group>";
+		};
 		C26A54B036690B93DAC5C61B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +375,7 @@
 				C6C8C55F268CDF20008A6799 /* Services and Utilities */,
 				C6E4B0BB26B9D117001C1FF4 /* InfoCollectionViewController.swift */,
 				C6E4B0BD26B9D36E001C1FF4 /* InfoCollectionViewCell.swift */,
+				6461102C281C51C50075E974 /* Information */,
 			);
 			path = MitPostiOS;
 			sourceTree = "<group>";
@@ -500,6 +520,7 @@
 				C6722D4C26A871BB00C940F7 /* NoticeImageController.swift in Sources */,
 				C60CBE52269DC3160053D0F9 /* MagazineModel.swift in Sources */,
 				C674B0A226A13A3000BB3D20 /* NoticeCell.swift in Sources */,
+				64611032281C52680075E974 /* singleCell.swift in Sources */,
 				C6FDE00E2688F8BF00CBC270 /* MitPostiOS.xcdatamodeld in Sources */,
 				C6FDE0062688F8BF00CBC270 /* SceneDelegate.swift in Sources */,
 				C6C36CA826F30CD3005FB066 /* SLCMHeaderView.swift in Sources */,
@@ -514,13 +535,16 @@
 				C6B775DD26F0863200FEF9DB /* UpcomingEvents.swift in Sources */,
 				C670051A2690F95B00878694 /* InstagramCollectionViewCell.swift in Sources */,
 				C60AE559268902690003C6F4 /* EventsTableViewController.swift in Sources */,
+				64611030281C52680075E974 /* rectCell.swift in Sources */,
 				C60CBE58269DE2290053D0F9 /* MagazinePDFController.swift in Sources */,
 				C60AE5512688FE060003C6F4 /* MasterTabBarController.swift in Sources */,
 				C60AE55B2689027A0003C6F4 /* NoticesTableViewController.swift in Sources */,
+				64611031281C52680075E974 /* squareCell.swift in Sources */,
 				C68D47AA26A892CD00D4545C /* TwitterBridge.m in Sources */,
 				C660905426B7013700E56FF9 /* Slcm Model.swift in Sources */,
 				C67005182690F74A00878694 /* SocialModels.swift in Sources */,
 				C6E4B0BC26B9D117001C1FF4 /* InfoCollectionViewController.swift in Sources */,
+				6461102B281C516D0075E974 /* informationVC.swift in Sources */,
 				C6BAA3F5268CAD7000D3ED11 /* TwitterCell.swift in Sources */,
 				C68D47AF26AC119A00D4545C /* SlcmInternalController.swift in Sources */,
 			);

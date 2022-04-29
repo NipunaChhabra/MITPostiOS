@@ -107,7 +107,8 @@ class ArticleViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func infoPressed(){
-        let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        //let vc =  InfoCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let vc =  informationVC()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
