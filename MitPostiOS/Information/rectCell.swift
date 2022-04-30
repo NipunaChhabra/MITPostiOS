@@ -17,18 +17,6 @@ class rectCell: UICollectionViewCell {
         
     }
     
-    lazy var listNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "The Standard"
-        if UIViewController().isSmalliPhone(){
-            label.font = UIFont.boldSystemFont(ofSize: 15)
-        }else{
-            label.font = UIFont.boldSystemFont(ofSize: 17)
-        }
-        label.textAlignment = .center
-        return label
-    }()
-    
     lazy var infoImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
